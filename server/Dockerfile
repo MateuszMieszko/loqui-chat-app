@@ -1,9 +1,10 @@
 FROM node:20-alpine
 
+WORKDIR /cache
+
+COPY package*.json .
+# COPY package-lock.json .
+RUN npm install --silent
+
 WORKDIR /app
-
-COPY ./server/package*.json ./
-
-RUN npm install --production=false
-
-EXPOSE 8080
+COPY . .
