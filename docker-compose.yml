@@ -1,0 +1,43 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    container_name: server
+    ports:
+      - "${SERVER_HOST_PORT}:${SERVER_PORT}"
+    volumes:
+      - ./server:/app
+      - ./wait-for.sh:/wait-for.sh
+      - ./.env:/app/.env
+    command: sh -c '/wait-for.sh database:${DB_PORT} -- npm run dev'
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
+    depends_on:
+      - database
+
+  database:
+    image: mariadb:latest
+    container_name: database
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    ports:
+      - "${DB_HOST_PORT}:${DB_PORT}"
+    volumes:
+      - ./database/db-data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  client:
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    container_name: client
+    ports:
+      - "${CLIENT_HOST_PORT}:${CLIENT_PORT}" # React app runs on port 3000
+    depends_on:
+      - server
