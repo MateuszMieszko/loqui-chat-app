@@ -11,6 +11,20 @@ services:
       - ./database/db-data:/var/lib/mysql
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
+  adminer:
+    depends_on:
+      - database
+    image: adminer
+    restart: always
+    ports:
+      - "${ADMINER_HOST_PORT}:${ADMINER_PORT}"
+    environment:
+      ADMINER_DEFAULT_DRIVER: mysql
+      ADMINER_DEFAULT_DB: ${DB_NAME}
+      ADMINER_DEFAULT_SERVER: database
+      ADMINER_DEFAULT_USERNAME: ${DB_USER}
+      ADMINER_DEFAULT_PASSWORD: ${DB_PASSWORD}
+
   server:
     build:
       context: ./server
