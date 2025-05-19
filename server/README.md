@@ -1,4 +1,4 @@
-# Loqui Chat App - API
+# Loqui Chat App - API documentation
 
 ## GET /api/users
 > Pobierz dane wszystkich użytkowników.
@@ -19,22 +19,22 @@ GET /api/users
 STATUS 200
 
 {
-	"users": [
-		{
-			"id": 1,
-			"username": "alice",
-			"password_hash": "88d4266fd4e6338d"
-		},
-		{
-			"id": 2,
-			"username": "bob",
-			"password_hash": "$2y$10$qrdefghij"
-		},
-		{
-			"id": 3,
-			"username": "carol",
-			"password_hash": "$2y$10$123567890"
-		},
+    "users": [
+        {
+            "id": 1,
+            "username": "alice",
+            "password_hash": "88d4266fd4e6338d"
+        },
+        {
+            "id": 2,
+            "username": "bob",
+            "password_hash": "$2y$10$qrdefghij"
+        },
+        {
+            "id": 3,
+            "username": "carol",
+            "password_hash": "$2y$10$123567890"
+        },
     ]
 }
 ```
@@ -58,11 +58,11 @@ GET /api/users/2
 STATUS 200
 
 {
-	"user": {
-		"id": 2,
-		"username": "bob",
-		"password_hash": "$2y$10$qrstuvwxyzabcdefghij"
-	}
+    "user": {
+        "id": 2,
+        "username": "bob",
+        "password_hash": "$2y$10$qrstuvwxyzabcdefghij"
+    }
 }
 ```
 
@@ -86,7 +86,7 @@ POST /api/users
 STATUS 201
 
 {
-	"message": "201 New user created successfully."
+    "message": "201 New user created successfully."
 }
 ```
 
@@ -124,10 +124,10 @@ POST /api/auth
 STATUS 200
 
 {
-	"login": true,
-	"id": 19,
-	"username": "jan123",
-	"token": "eyJhbGciOiJIUzI1NiIsI..."
+    "login": true,
+    "id": 19,
+    "username": "jan123",
+    "token": "eyJhbGciOiJIUzI1NiIsI..."
 }
 ```
 
@@ -136,16 +136,16 @@ STATUS 200
 STATUS 401
 
 {
-	"login": false,
-	"message": "401 Invalid password."
+    "login": false,
+    "message": "401 Invalid password."
 }
 ```
 ```json
 STATUS 401
 
 {
-	"login": false,
-	"message": "401 User does not exist."
+    "login": false,
+    "message": "401 User does not exist."
 }
 ```
 
