@@ -2,8 +2,6 @@ import { query, dateToTimestamp } from "./databaseQuery.js";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET_KEY } from "../configs/auth.config.js";
 
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJqYW4xMjMiLCJpYXQiOjE3NDc2NzU0NTYsImV4cCI6MTgzNDA3NTQ1Nn0.5AJuwU_0x7ATjZ221-_moa2g0Fdo8zJF7VyCNxHR2jg";
-
 export async function addTokenToBlacklist(token, reason=null) {
     await removeExpiredTokens();
     if (!token) return;
