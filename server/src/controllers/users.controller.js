@@ -1,5 +1,5 @@
 import { query } from "../utils/databaseQuery.js";
-import { shaHash } from "../utils/hashingFunction.js";
+import { bcryptHash } from "../utils/hashingFunction.js";
 
 async function findAll(req, res, next) {
     const rows = await query('SELECT * FROM users');
@@ -18,7 +18,7 @@ async function create(req, res, next) {
     const username = req.body["username"];
     const password = req.body["password"];
     console.log(password);
-    const passwordHash = shaHash(password);
+    const passwordHash = await bcryptHash(password);
     console.log(passwordHash);
     const rows = await query("INSERT INTO users (username, password_hash) VALUES (?, ?);", [username, passwordHash]);
     console.log(rows);
