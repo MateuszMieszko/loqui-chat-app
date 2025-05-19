@@ -17,4 +17,7 @@ api.post('/', catchAsync(usersController.create));
 // DELETE /users
 api.delete('/', isLogged, catchAsync(usersController.remove));
 
+// PUT /users
+api.put('/', isLogged, catchAsync(usersController.modify));
+
 export default api;
