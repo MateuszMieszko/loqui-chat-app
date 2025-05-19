@@ -10,4 +10,7 @@ api.get('/', catchAsync(usersController.findAll));
 // GET /users/:id
 api.get('/:id', catchAsync(usersController.findOne));
 
+// POST /users
+api.post('/', catchAsync(usersController.create));
+
 export default api;
