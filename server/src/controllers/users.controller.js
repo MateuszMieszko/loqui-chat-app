@@ -22,8 +22,15 @@ async function create(req, res, next) {
     return res.status(200).send({ message: "200 New user created successfully." });
 }
 
+async function remove(req, res, next) {
+    const id = req.sessionUser.id;
+    const rows = await query("UPDATE users SET deleted = 1 WHERE id = ?", [id]);
+    return res.status(200).send({ message: "200 Deleted account succesfully."});
+}
+
 export default {
     findAll,
     findOne,
-    create
+    create,
+    remove
 }
