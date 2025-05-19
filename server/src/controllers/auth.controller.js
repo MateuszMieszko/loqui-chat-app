@@ -2,6 +2,7 @@ import { query } from "../utils/databaseQuery.js";
 import { JWT_SECRET_KEY, JWT_LIFETIME } from "../configs/auth.config.js";
 import jwt from "jsonwebtoken";
 import { bcryptCompare } from "../utils/hashingFunction.js";
+import { addTokenToBlacklist } from "../utils/blacklistedTokens.js";
 
 async function login(req, res, next) {
     const sqlQuery = "SELECT * FROM users WHERE username = ?";
@@ -29,6 +30,19 @@ async function login(req, res, next) {
     return res.json({ login: true, id, username, token });
 }
 
+async function logout(req, res, next) {
+    const token = req.body.token;
+
+    if (!token) {
+        return res.status(400).json({ message: "400 No token in request." });
+    }
+
+    await addTokenToBlacklist(token);
+
+    return res.json({ message: "Token added to blacklist." });
+}
+
 export default {
-    login
+    login,
+    logout
 }

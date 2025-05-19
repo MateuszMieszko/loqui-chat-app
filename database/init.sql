@@ -16,6 +16,14 @@ CREATE TABLE messages (
     FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE blacklisted_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(512) NOT NULL UNIQUE,
+    blacklisted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expires_at TIMESTAMP NULL,
+    reason VARCHAR(255) NULL
+);
+
 INSERT INTO users (username, password_hash) VALUES
     ('alice', '88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589'), -- hasło: abcd
     ('bob',   '$2y$10$qrstuvwxyzabcdefghij'),
