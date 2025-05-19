@@ -19,6 +19,10 @@ async function login(req, res, next) {
         return res.status(401).json({ login: false, message: "401 Invalid password." });
     }
 
+    if (user.deleted) {
+        return res.status(401).json({ login: false, message: "401 Deleted user." });
+    }
+
     const id = user.id;
     const token = jwt.sign({ id, username }, JWT_SECRET_KEY, { expiresIn: JWT_LIFETIME });
 
