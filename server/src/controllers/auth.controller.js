@@ -11,16 +11,14 @@ async function login(req, res, next) {
     
     const correctPassword = shaHash(password) === user.password_hash;
 
-    console.log("Correct credentials =", correctPassword);
-
     if (!correctPassword) {
-        return res.status(401).json({ message: "Invalid credentials" });
+        return res.status(401).json({ login: false, message: "Invalid credentials" });
     }
 
     const id = user.id;
-    const token = jwt.sign({ id, username }, JWT_SECRET_KEY, { expiresIn: 300 });
+    const token = jwt.sign({ id, username }, JWT_SECRET_KEY, { expiresIn: JWT_LIFETIME });
 
-    return res.json({ Login: true, token });
+    return res.json({ login: true, id, username, token });
 }
 
 export default {
