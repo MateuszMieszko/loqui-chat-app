@@ -1,14 +1,15 @@
 import { Router } from "express";
 import usersController from "../controllers/users.controller.js"; 
 import { catchAsync } from "../middlewares/errors.js";
+import { isLogged } from "../middlewares/auth.js";
 
 const api = Router();
 
 // GET /users
-api.get('/', catchAsync(usersController.findAll));
+api.get('/', isLogged, catchAsync(usersController.findAll));
 
 // GET /users/:id
-api.get('/:id', catchAsync(usersController.findOne));
+api.get('/:id', isLogged, catchAsync(usersController.findOne));
 
 // POST /users
 api.post('/', catchAsync(usersController.create));

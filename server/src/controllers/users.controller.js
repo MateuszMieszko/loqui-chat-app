@@ -9,18 +9,18 @@ async function findAll(req, res, next) {
 
 async function findOne(req, res, next) {
     const { id } = req.params;
-    const rows = await query(`SELECT * FROM users WHERE id=${id}`);
+    const rows = await query("SELECT * FROM users WHERE id=?", [id]);
     if (rows.length == 0) return next();
     return res.status(200).send({ data: rows[0] });
 }
 
 async function create(req, res, next) {
-    const name = req.body["name"];
+    const username = req.body["username"];
     const password = req.body["password"];
     console.log(password);
     const passwordHash = shaHash(password);
     console.log(passwordHash);
-    const rows = await query("INSERT INTO users (username, password_hash) VALUES (?, ?);", [name, passwordHash]);
+    const rows = await query("INSERT INTO users (username, password_hash) VALUES (?, ?);", [username, passwordHash]);
     console.log(rows);
     return res.status(200).send();
 }
