@@ -10,13 +10,13 @@ async function login(req, res, next) {
     const [user] = await query(sqlQuery, [username]);
 
     if (!user) {
-        return res.status(401).json({ login: false, message: "User does not exist" })
+        return res.status(401).json({ login: false, message: "401 User does not exist." })
     }
     
     const isPasswordCorrect = await bcryptCompare(password, user.password_hash);
 
     if (!isPasswordCorrect) {
-        return res.status(401).json({ login: false, message: "Invalid password" });
+        return res.status(401).json({ login: false, message: "401 Invalid password." });
     }
 
     const id = user.id;
