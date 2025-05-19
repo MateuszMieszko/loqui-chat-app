@@ -9,7 +9,7 @@ export async function isLogged(req, res, next) {
         if (decoded === false) return res.status(401).json({ message: "401 Invalid token." });
         if (decoded === null) return res.status(401).json({ message: "401 Token expired." });
         const rows = await query("SELECT * FROM users WHERE id = ? AND deleted = 1", [decoded.id]);
-        if(rows) return res.status(401).json({ message: "401 Deleted user." });
+        if (rows.length > 0) return res.status(401).json({ message: "401 Deleted user." });
         req.sessionUser = decoded;
         next();
     }
