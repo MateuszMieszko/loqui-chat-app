@@ -1,4 +1,4 @@
-import { query } from "../services/db.service.js";
+import { query } from "../utils/databaseQuery.js";
 import { JWT_SECRET_KEY, BCRYPT_SALT, JWT_LIFETIME } from "../configs/auth.config.js";
 import jwt from "jsonwebtoken";
 import { shaHash } from "../utils/hashingFunction.js";

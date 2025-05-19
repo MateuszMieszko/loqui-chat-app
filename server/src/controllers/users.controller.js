@@ -1,4 +1,4 @@
-import { query } from "../services/db.service.js";
+import { query } from "../utils/databaseQuery.js";
 import { shaHash } from "../utils/hashingFunction.js";
 
 async function findAll(req, res, next) {
