@@ -5,6 +5,8 @@ import usersRouter from "./src/routes/users.route.js";
 import { catchErrors, notFound } from "./src/middlewares/errors.js";
 import { fileURLToPath } from "url";
 import { join, dirname } from "path";
+import authRouter from "./src/routes/auth.route.js";
+import { isLogged } from "./src/middlewares/auth.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,7 +25,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     res.json({ message: 'ok' });
 });
-app.use('/api/users', usersRouter);
+app.use('/api/users', isLogged, usersRouter);
+app.use('/api/auth', authRouter);
 
 // errors handling
 app.use(notFound);
