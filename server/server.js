@@ -12,6 +12,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+import { addTokenToBlacklist } from "./src/utils/blacklistedTokens.js";
+
+
 // routes config
 app.get('/', (req, res) => {
     res.json({ message: 'ok' });

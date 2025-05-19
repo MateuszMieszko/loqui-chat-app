@@ -13,3 +13,7 @@ export async function query(sql, params=null) {
         throw error;
     }
 }
+
+export function dateToTimestamp(date) {
+    return date.toISOString().slice(0, 19).replace('T', ' ');
+}

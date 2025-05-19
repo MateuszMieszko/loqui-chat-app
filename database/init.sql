@@ -17,7 +17,7 @@ CREATE TABLE messages (
 
 CREATE TABLE blacklisted_tokens (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    token VARCHAR(512) NOT NULL,
+    token VARCHAR(512) NOT NULL UNIQUE,
     blacklisted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     expires_at TIMESTAMP NULL,
     reason VARCHAR(255) NULL
