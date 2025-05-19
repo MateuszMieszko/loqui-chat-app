@@ -19,7 +19,7 @@ async function create(req, res, next) {
     const password = req.body["password"];
     const passwordHash = await bcryptHash(password);
     const rows = await query("INSERT INTO users (username, password_hash) VALUES (?, ?);", [username, passwordHash]);
-    return res.status(200).send({ message: "200 New user created successfully." });
+    return res.status(201).send({ message: "201 New user created successfully." });
 }
 
 export default {
