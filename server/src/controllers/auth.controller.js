@@ -14,7 +14,7 @@ async function login(req, res, next) {
     console.log("Correct credentials =", correctPassword);
 
     if (!correctPassword) {
-        return res.status(401).json({ message: "Nieprawdiłowe dane logowania" });
+        return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const id = user.id;
