@@ -1,9 +1,10 @@
+import { isTokenBlacklisted } from "../utils/blacklistedTokens.js";
 import { verifyToken } from "../utils/verifyToken.js";
 
-export function isLogged(req, res, next) {
+export async function isLogged(req, res, next) {
     try {
         const token = req.body.token;
-        const decoded = verifyToken(token);
+        const decoded = await verifyToken(token);
         if (decoded === false) return res.status(401).json({ message: "401 Invalid token." });
         if (decoded === null) return res.status(401).json({ message: "401 Token expired." });
         req.sessionUser = decoded;

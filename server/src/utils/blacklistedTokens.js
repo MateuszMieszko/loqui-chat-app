@@ -27,11 +27,15 @@ export async function addTokenToBlacklist(token, reason=null) {
 export async function isTokenBlacklisted(token) {
     if (!token) return false;
 
+    console.log("isTokenBlacklisted", token);
+
     try {
         const sqlQuery = "SELECT 1 FROM blacklisted_tokens WHERE token = ?";
         const params = [token];
 
         const rows = await query(sqlQuery, params);
+
+        console.log(rows);
 
         return rows.length > 0;
     }
@@ -53,3 +57,6 @@ export async function removeExpiredTokens() {
         return;
     }
 }
+
+// let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJ6dXpvbCIsImlhdCI6MTc0NzY4MjQyNywiZXhwIjoxODM0MDgyNDI3fQ.I9WbxNQczLMahEn2aglRP4lDCkUWbFxfa1BLW-oNd0s";
+// console.log("isTokenBlacklisted", await isTokenBlacklisted(token));
