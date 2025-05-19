@@ -12,6 +12,7 @@ services:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
 
   adminer:
+    container_name: db-panel
     depends_on:
       - database
     image: adminer
