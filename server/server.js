@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import { query } from "./src/services/db.service.js";
+import { query } from "./src/utils/databaseQuery.js";
 import usersRouter from "./src/routes/users.route.js";
 import { catchErrors, notFound } from "./src/middlewares/errors.js";
 import { fileURLToPath } from "url";
