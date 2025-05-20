@@ -4,12 +4,14 @@ import authRouter from "./src/routes/auth.route.js";
 import messagesRouter from "./src/routes/messages.route.js";
 import usersRouter from "./src/routes/users.route.js";
 import { catchErrors, notFound } from "./src/middlewares/errors.js";
+import cors from "cors";
 
 dotenv.config();
 const PORT = process.env.SERVER_PORT;
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
