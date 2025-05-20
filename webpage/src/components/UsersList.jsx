@@ -27,7 +27,7 @@ export default function UsersList({ users, onClick=undefined }) {
             className="usersList"
             >
                 <SearchBar handleChange={handleChange}/>
-                {searchedUsers.map((user) => <UserPlate onClick={onClick}> {user} </UserPlate>)}
+                {searchedUsers.map((user) => <UserPlate onClick={onClick} key={user}> {user} </UserPlate>)}
             </div>
     )
 }
