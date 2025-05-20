@@ -2,7 +2,7 @@ export default function SearchBar({ defaultText="Search...", handleChange }) {
     return (
         <textarea
             className="searchBar"
-            autocomplete={false}
+            autoComplete="Off"
             onChange={handleChange}
             placeholder={defaultText}
             rows={1}
