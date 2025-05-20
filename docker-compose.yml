@@ -57,5 +57,6 @@ services:
       - "${WEBPAGE_HOST_PORT}:${WEBPAGE_PORT}"
     volumes:
       - ./webpage:/app
+      - ./.env:/app/.env
     command: >
       sh -c 'cp -rfu /cache/node_modules/. /app/node_modules/ && cp -fu /cache/package-lock.json /app/package-lock.json && npm run dev'
