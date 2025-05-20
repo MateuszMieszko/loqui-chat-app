@@ -36,7 +36,6 @@ async function modify(req, res, next) {
     const password = req.body["password"];
     if(password) {
         const passwordHash = await bcryptHash(password);
-        console.log([username, passwordHash, id]);
         const rows = await query("UPDATE users SET username = ?, password_hash = ? WHERE id = ?;", [username, passwordHash, id]);
     }
     else {
