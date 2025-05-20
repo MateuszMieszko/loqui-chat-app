@@ -40,3 +40,26 @@
 .read-the-docs {
   color: #888;
 }
+
+.userPlate {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:row;
+  border-radius: 3px;
+  border-style: dotted;
+  padding:0.5em;
+}
+
+.userIcon {
+  width:2.5em;
+  height:2.5em;
+  margin:1em;
+  border-radius: 3px;
+  border-style: dotted;
+}
+
+.userNametag {
+  border-radius: 3px;
+  border-style: dotted;
+}
