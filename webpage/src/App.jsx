@@ -1,5 +1,6 @@
 import './App.css'
 import UsersList from "./components/UsersList";
+import SearchBar from './components/SearchBar';
 
 function App() {
 
@@ -7,7 +8,8 @@ function App() {
 
   return (
     <>
-      <UsersList users={users}> </UsersList>
+      <SearchBar />
+      <UsersList users={users} />
     </>
   )
 }
