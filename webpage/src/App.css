@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  border-radius: 3px;
+  border-style: dotted;
 }
 
 .logo {
@@ -55,17 +57,18 @@
   width:2.5em;
   height:2.5em;
   margin:1em;
-  border-radius: 3px;
-  border-style: dotted;
+  border:inherit;
 }
 
 .userNametag {
-  border-radius: 3px;
-  border-style: dotted;
+  border:inherit;
 }
 
 .usersList {
   padding: 3px;
-  border-radius: 3px;
-  border-style: dotted;
+  border:inherit;
+}
+
+.searchBar {
+  border:inherit;
 }
