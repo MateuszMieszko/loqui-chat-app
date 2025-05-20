@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import './LoginSignup.css'
 
-import user_logo from '../assets/user_logo.png'
-import email_logo from '../assets/email_logo.png'
-import password_logo from '../assets/password_logo.png'
+// Zamiast importować obrazki, używamy ścieżek do public/
+const user_logo = '/user_logo.png';
+const email_logo = '/email_logo.png';
+const password_logo = '/password_logo.png';
+
 const LoginSignup = () => {
   const [action, setAction] = useState("Login");
   return (
