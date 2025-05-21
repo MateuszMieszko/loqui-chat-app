@@ -20,17 +20,19 @@ const LoginSignup = () => {
             alert("Username must be at least 3 characters long");
             return;
         }
-        if(email.length < 5) {
-            alert("Email does not exist");
-            return;
-        }
         if (password.length < 5) {
             alert("Username must be at least 3 characters long");
             return;
         }
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-            return;
+        if (action === "Sign Up") {
+            if(email.length < 5) {
+                alert("Email does not exist");
+                return;
+            }
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return;
+            }
         }
         window.location.href = "https://youtube.com";
     };
