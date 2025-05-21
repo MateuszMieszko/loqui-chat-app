@@ -16,12 +16,12 @@ const LoginSignup = () => {
     const [error, setError] = useState("");
 
     const handleClick = () => {
-        if (username.length < 3) {
-            alert("Username must be at least 3 characters long");
+        if (username.length < 5) {
+            alert("Username must be at least 5 characters long");
             return;
         }
         if (password.length < 5) {
-            alert("Username must be at least 3 characters long");
+            alert("Password must be at least 5 characters long");
             return;
         }
         if (action === "Sign Up") {
