@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './LoginSignup.css'
 
-// Zamiast importować obrazki, używamy ścieżek do public/
 const user_logo = '/user_logo.png';
 const email_logo = '/email_logo.png';
 const password_logo = '/password_logo.png';
@@ -104,7 +103,6 @@ const LoginSignup = () => {
             </div>
         </div>
         )}
-        {/* sprawdzanie czy dane sa poprawne*/}
 
         <div className="ok-btn-container" onClick={handleClick}>
             <button className="ok-btn" >
