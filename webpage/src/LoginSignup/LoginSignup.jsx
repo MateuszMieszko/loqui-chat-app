@@ -14,10 +14,27 @@ const LoginSignup = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-    const isSignUpInvalid = action === "Sign Up" && 
-    (username.length < 3 || email.length < 5 || 
-    password.length < 8 || password !== confirmPassword);
-  return (
+
+    const handleClick = () => {
+        if (username.length < 3) {
+            alert("Username must be at least 3 characters long");
+            return;
+        }
+        if(email.length < 5) {
+            alert("Email does not exist");
+            return;
+        }
+        if (password.length < 5) {
+            alert("Username must be at least 3 characters long");
+            return;
+        }
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+        window.location.href = "https://youtube.com";
+    };
+    return (
     <div className='container'>
         <div className="switch-action-container">
             {action === "Login" ? (
@@ -87,16 +104,8 @@ const LoginSignup = () => {
         )}
         {/* sprawdzanie czy dane sa poprawne*/}
 
-        {action === "Sign Up" && (
-            <div className="error">
-                {username.length < 3 && <p>Username must be at least 3 characters long</p>}
-                {email.length < 5 && <p>Email is not existing</p>}
-                {password.length < 8 && <p>Password must be at least 8 characters long</p>}
-                {password !== confirmPassword && <p>Passwords do not match</p>}
-            </div>
-        )}
-        <div className="ok-btn-container">
-            <button className="ok-btn" disabled={isSignUpInvalid}>
+        <div className="ok-btn-container" onClick={handleClick}>
+            <button className="ok-btn" >
                 {action}
             </button>
         </div>
