@@ -84,7 +84,7 @@ Dostępne tylko dla niezalogowanego użytkownika.
 }
 ```
 
-## DELETE /users/:id
+## DELETE /users
 > Ustaw użytkownikowi o podanym id status na usunięty.
 
 Dostępne tylko dla użytkownika o danym id.
