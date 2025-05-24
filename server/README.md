@@ -6,18 +6,16 @@
 Dostępne tylko dla zalogowanego użytkownika.
 
 ### Przykładowe zapytanie
+**GET /api/users**
 ```json
-GET /api/users
-
 {
     "token": "eyJhbGciOiJIUzI1N..."
 }
 ```
 
 ### Przykładowa odpowiedź
+**STATUS 200**
 ```json
-STATUS 200
-
 {
     "users": [
         {
@@ -45,18 +43,16 @@ STATUS 200
 Dostępne tylko dla zalogowanego użytkownika.
 
 ### Przykładowe zapytanie
+**GET /api/users/2**
 ```json
-GET /api/users/2
-
 {
     "token": "eyJhbGciOiJIUzI1N..."
 }
 ```
 
 ### Przykładowa odpowiedź
+**STATUS 200**
 ```json
-STATUS 200
-
 {
     "user": {
         "id": 2,
@@ -72,9 +68,8 @@ STATUS 200
 Dostępne tylko dla niezalogowanego użytkownika.
 
 ### Przykładowe zapytanie
+**POST /api/users**
 ```json
-POST /api/users
-
 {
     "username": "jan123",
     "password": "haslomaslo"
@@ -82,9 +77,8 @@ POST /api/users
 ```
 
 ### Przykładowa odpowiedź
+**STATUS 201**
 ```json
-STATUS 201
-
 {
     "message": "201 New user created successfully."
 }
@@ -95,14 +89,53 @@ STATUS 201
 
 Dostępne tylko dla użytkownika o danym id.
 
-TBD
+### Przykładowe zapytanie
+**DELETE /users**
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsI..."
+}
+```
 
-## PUT /users/:id
+### Przykładowa odpowiedź
+**STATUS 200**
+```json
+{
+    "message": "200 Deleted account succesfully."
+}
+```
+
+### Przykładowy błąd
+**STATUS 401**
+```json
+{
+    "message": "401 Deleted user."
+}
+```
+
+## PUT /users
 > Aktualizuj dane użytkownika o podanym id.
 
 Dostępne tylko dla użytkownika o danym id.
 
-TBD
+### Przykładowe zapytanie
+**PUT /users**
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsI...",
+    "username": "NowyNick",
+    "password": "NoweHaslo"
+}
+```
+`username` i `password` są opcjonalne
+
+### Przykładowa odpowiedź
+**STATUS 200**
+```json
+{
+    "message": "200 Edited user info."
+}
+```
 
 ## POST /api/auth
 > Zaloguj wybranego użytkownika.
@@ -110,9 +143,8 @@ TBD
 Dostępne tylko dla niezalogowanych.
 
 ### Przykładowe zapytanie
+**POST /api/auth**
 ```json
-POST /api/auth
-
 {
     "username": "jan123",
     "password": "haslomaslo"
@@ -120,9 +152,8 @@ POST /api/auth
 ```
 
 ### Przykładowa odpowiedź
+**STATUS 200**
 ```json
-STATUS 200
-
 {
     "login": true,
     "id": 19,
@@ -132,17 +163,15 @@ STATUS 200
 ```
 
 ### Przykładowy błąd
+**STATUS 401**
 ```json
-STATUS 401
-
 {
     "login": false,
     "message": "401 Invalid password."
 }
 ```
+**STATUS 401**
 ```json
-STATUS 401
-
 {
     "login": false,
     "message": "401 User does not exist."
@@ -154,4 +183,26 @@ STATUS 401
 
 Dostępne tylko dla zalogowanego użytkownika.
 
-TBD
+### Przykładowe zapytanie
+**POST /api/auth**
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiIsI..."
+}
+```
+
+### Przykładowa odpowiedź
+**STATUS 200**
+```json
+{
+    "message": "Token added to blacklist."
+}
+```
+
+### Przykładowy błąd
+**STATUS 401**
+```json
+{
+    "message": "401 Invalid token."
+}
+```
