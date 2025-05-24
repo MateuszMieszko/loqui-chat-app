@@ -48,6 +48,23 @@ const LoginSignup = () => {
             } catch (error) {
                 alert("Błąd połączenia z serwerem");
             }
+            return;
+        }
+        // LOGIN
+        try {
+            const response = await fetch("http://localhost:8000/api/auth", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await response.json();
+            if (data.login) {
+                alert("logged in succesfully");
+            } else {
+                alert("login failed");
+            }
+        } catch {
+            alert("login failed");
         }
         window.location.href = "https://youtube.com";
     };
