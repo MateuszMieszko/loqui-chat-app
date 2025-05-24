@@ -25,7 +25,7 @@ const LoginSignup = () => {
         }
         if (action === "Sign Up") {
             if(email.length < 5) {
-                alert("Email does not exist");
+                alert("Email is not valid");
                 return;
             }
             if (password !== confirmPassword) {
@@ -39,15 +39,15 @@ const LoginSignup = () => {
                     body: JSON.stringify({ username, password }),
                 });
                 if (response.ok) {
-                    alert("Rejestracja udana!");
-                    setAction("Login"); // Przełącz na login po rejestracji
+                    alert("Registration successful!");
+                    setAction("Login"); // Switch to login after registration
                     return;
                 } else {
                     const data = await response.json();
-                    alert(data.message || "Błąd rejestracji");
+                    alert(data.message || "Registration error");
                 }
             } catch {
-                alert("Błąd połączenia z serwerem");
+                alert("Connection error with server");
             }
             return;
         }
@@ -60,13 +60,13 @@ const LoginSignup = () => {
             });
             const data = await response.json();
             if (data.login) {
-                alert("logged in succesfully");
+                alert("Logged in successfully");
                 window.location.href = "https://youtube.com";
             } else {
-                alert("login failed");
+                alert("Login failed");
             }
         } catch {
-            alert("login failed");
+            alert("Login failed");
         }
     };
     return (
