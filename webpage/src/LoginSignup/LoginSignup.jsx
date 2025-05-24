@@ -61,7 +61,13 @@ const LoginSignup = () => {
                 alert("Logged in successfully");
                 window.location.href = "https://youtube.com";
             } else {
-                setError("Login failed");
+                if (data.message && data.message.includes("User does not exist")) {
+                    setError("Wrong username");
+                } else if (data.message && data.message.includes("Invalid password")) {
+                    setError("Wrong password");
+                } else {
+                    setError("Login failed");
+                }
             }
         } catch {
             setError("Login failed");
