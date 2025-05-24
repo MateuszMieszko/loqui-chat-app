@@ -17,7 +17,7 @@ Dostępne tylko dla zalogowanego użytkownika.
 **STATUS 200**
 ```json
 {
-    "users": [
+    "users_data": [
         {
             "id": 1,
             "username": "alice",
@@ -54,7 +54,7 @@ Dostępne tylko dla zalogowanego użytkownika.
 **STATUS 200**
 ```json
 {
-    "user": {
+    "user_data": {
         "id": 2,
         "username": "bob",
         "password_hash": "$2y$10$qrstuvwxyzabcdefghij"
