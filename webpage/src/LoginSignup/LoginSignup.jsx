@@ -14,7 +14,7 @@ const LoginSignup = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleClick = () => {
+    const handleClick = async () => {
         if (username.length < 5) {
             alert("Username must be at least 5 characters long");
             return;
@@ -31,6 +31,22 @@ const LoginSignup = () => {
             if (password !== confirmPassword) {
                 alert("Passwords do not match");
                 return;
+            }
+            try {
+                const response = await fetch("http://localhost:8000/api/users", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password }),
+                });
+                if (response.ok) {
+                    alert("Rejestracja udana!");
+                    window.location.href = "https://youtube.com";
+                } else {
+                    const data = await response.json();
+                    alert(data.message || "Błąd rejestracji");
+                }
+            } catch (error) {
+                alert("Błąd połączenia z serwerem");
             }
         }
         window.location.href = "https://youtube.com";
