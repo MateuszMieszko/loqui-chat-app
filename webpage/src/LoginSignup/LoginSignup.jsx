@@ -40,12 +40,13 @@ const LoginSignup = () => {
                 });
                 if (response.ok) {
                     alert("Rejestracja udana!");
-                    window.location.href = "https://youtube.com";
+                    setAction("Login"); // Przełącz na login po rejestracji
+                    return;
                 } else {
                     const data = await response.json();
                     alert(data.message || "Błąd rejestracji");
                 }
-            } catch (error) {
+            } catch {
                 alert("Błąd połączenia z serwerem");
             }
             return;
@@ -60,13 +61,13 @@ const LoginSignup = () => {
             const data = await response.json();
             if (data.login) {
                 alert("logged in succesfully");
+                window.location.href = "https://youtube.com";
             } else {
                 alert("login failed");
             }
         } catch {
             alert("login failed");
         }
-        window.location.href = "https://youtube.com";
     };
     return (
     <div className='container'>
