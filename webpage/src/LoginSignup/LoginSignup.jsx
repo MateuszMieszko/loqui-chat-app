@@ -15,21 +15,21 @@ const LoginSignup = () => {
     const [error, setError] = useState("");
 
     const handleClick = async () => {
-        if (username.length < 5) {
-            alert("Username must be at least 5 characters long");
-            return;
-        }
-        if (password.length < 5) {
-            alert("Password must be at least 5 characters long");
-            return;
-        }
         if (action === "Sign Up") {
-            if(email.length < 5) {
-                alert("Email is not valid");
+            if (username.length < 5) {
+                setError("Username must be at least 5 characters long");
+                return;
+            }
+            if (password.length < 5) {
+                setError("Password must be at least 5 characters long");
+                return;
+            }
+            if(email.length < 5 || !email.includes("@")) {
+                setError("Email is not valid");
                 return;
             }
             if (password !== confirmPassword) {
-                alert("Passwords do not match");
+                setError("Passwords do not match");
                 return;
             }
             try {
@@ -40,18 +40,16 @@ const LoginSignup = () => {
                 });
                 if (response.ok) {
                     alert("Registration successful!");
-                    setAction("Login"); // Switch to login after registration
-                    return;
+                    setAction("Login");
                 } else {
                     const data = await response.json();
-                    alert(data.message || "Registration error");
+                    setError(data.message || "Registration error");
                 }
             } catch {
                 alert("Connection error with server");
             }
             return;
         }
-        // LOGIN
         try {
             const response = await fetch("http://localhost:8000/api/auth", {
                 method: "POST",
@@ -63,10 +61,10 @@ const LoginSignup = () => {
                 alert("Logged in successfully");
                 window.location.href = "https://youtube.com";
             } else {
-                alert("Login failed");
+                setError("Login failed");
             }
         } catch {
-            alert("Login failed");
+            setError("Login failed");
         }
     };
     return (
@@ -86,63 +84,66 @@ const LoginSignup = () => {
             <div className="text">{action}</div>
             <div className="underline"></div>
         </div>
-        <div className="inputs">
-            <div className="input">
-                <img src={user_logo} alt="User" />
-                <input 
-                type="text" 
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="username"
-                required
-                />
+        {error && <div className="error">{error}</div>}
+        <form onSubmit={(e) => e.preventDefault()}>
+            <div className="inputs">
+                <div className="input">
+                    <img src={user_logo} alt="User" />
+                    <input 
+                    type="text" 
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="username"
+                    required
+                    />
+                </div>
             </div>
-        </div>
-        {action === "Sign Up" && (
-        <div className="inputs">
-            <div className="input">
-                <img src={email_logo} alt="Email" />
-                <input 
-                type = "email" 
-                value={email} onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                required
-                />
+            {action === "Sign Up" && (
+            <div className="inputs">
+                <div className="input">
+                    <img src={email_logo} alt="Email" />
+                    <input 
+                    type = "email" 
+                    value={email} onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    required
+                    />
+                </div>
             </div>
-        </div>
-        )}
-        <div className="inputs">
-            <div className="input">
-                <img src={password_logo} alt="Password" />
-                <input 
-                type="password" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="password"
-                required
-                />
+            )}
+            <div className="inputs">
+                <div className="input">
+                    <img src={password_logo} alt="Password" />
+                    <input 
+                    type="password" 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="password"
+                    required
+                    />
+                </div>
             </div>
-        </div>
-        {action === "Sign Up" && (
-        <div className="inputs">
-            <div className="input">
-                <img src={password_logo} alt="PasswordV2" />
-                <input 
-                type="password" 
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="confirm password"
-                required
-                />
+            {action === "Sign Up" && (
+            <div className="inputs">
+                <div className="input">
+                    <img src={password_logo} alt="PasswordV2" />
+                    <input 
+                    type="password" 
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="confirm password"
+                    required
+                    />
+                </div>
             </div>
-        </div>
-        )}
+            )}
 
-        <div className="ok-btn-container" onClick={handleClick}>
-            <button className="ok-btn" >
-                {action}
-            </button>
-        </div>
+            <div className="ok-btn-container" onClick={handleClick}>
+                <button className="ok-btn">
+                    {action}
+                </button>
+            </div>
+        </form>
     </div>
   )
 }
