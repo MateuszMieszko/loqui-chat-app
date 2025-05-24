@@ -1,12 +1,14 @@
 import './App.css'
 import UsersList from "./components/UsersList";
+import Chat from "./components/Chat";
 
 function App() {
 
-  const users = [ "Zuzol", "Tofik", "Mati", "Patryk", "Kuba", "A", "B", "C", "D", "E", "F", "G", "H", "I"];
+  const users = [ "Zuzol", "Tofik", "Mati", "Patryk", "Kuba"];
 
   return (
     <>
+      <Chat />
       <UsersList users={users} />
     </>
   )
