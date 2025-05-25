@@ -12,7 +12,7 @@ wychodzimy za pomocą Ctrl+C
 
 #### Po włączeniu dostępne będą następujące adresy:
 - ```localhost:8000``` - serwer
-- ```localhost:2137``` - strona internetowa
+- ```localhost:8080``` - strona internetowa
 - ```localhost:3000``` - adminer (dane logowania są w pliku .env)
 
 #### Wchodzenie do konsoli kontenerów
