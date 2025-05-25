@@ -132,6 +132,13 @@ const LoginSignup = () => {
             setError(t("loginFailed"));
         }
     };
+
+    // Funkcja do zmiany trybu i czyszczenia errora
+    const switchAction = (newAction) => {
+        setAction(newAction);
+        setError("");
+    };
+
     return (
     <div className='container'>
         <div className='lang-switch-container'>
@@ -148,12 +155,12 @@ const LoginSignup = () => {
             {action === "Login" ? (
                 <div className="switch-action-info">
                     {t("switchToSignup")}
-                    <span className="switch-action-link" onClick={() => setAction("Sign Up")}>{t("switchToSignupLink")}</span>
+                    <span className="switch-action-link" onClick={() => switchAction("Sign Up")}>{t("switchToSignupLink")}</span>
                 </div>
             ) : (
                 <div className="switch-action-info">
                     {t("switchToLogin")}
-                    <span className="switch-action-link" onClick={() => setAction("Login")}>{t("switchToLoginLink")}</span>
+                    <span className="switch-action-link" onClick={() => switchAction("Login")}>{t("switchToLoginLink")}</span>
                 </div>
             )}
         </div>
