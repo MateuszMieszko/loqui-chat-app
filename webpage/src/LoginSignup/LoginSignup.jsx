@@ -13,23 +13,79 @@ const LoginSignup = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
+    const [lang, setLang] = useState("pl");
+
+    const messages = {
+        pl: {
+            login: "Logowanie",
+            signup: "Rejestracja",
+            username: "Nazwa użytkownika",
+            email: "E-mail",
+            password: "Hasło",
+            confirmPassword: "Powtórz hasło",
+            loginBtn: "Zaloguj się",
+            signupBtn: "Zarejestruj się",
+            switchToSignup: "Nie masz konta? ",
+            switchToSignupLink: "Zarejestruj się",
+            switchToLogin: "Masz już konto? ",
+            switchToLoginLink: "Zaloguj się",
+            usernameShort: "Nazwa użytkownika musi mieć co najmniej 5 znaków",
+            passwordShort: "Hasło musi mieć co najmniej 5 znaków",
+            emailInvalid: "Nieprawidłowy adres e-mail",
+            passwordsNoMatch: "Hasła nie są takie same",
+            registrationSuccess: "Rejestracja zakończona sukcesem!",
+            registrationError: "Błąd rejestracji",
+            connectionError: "Błąd połączenia z serwerem",
+            loginSuccess: "Zalogowano pomyślnie",
+            wrongUsername: "Nieprawidłowa nazwa użytkownika",
+            wrongPassword: "Nieprawidłowe hasło",
+            loginFailed: "Logowanie nie powiodło się"
+        },
+        en: {
+            login: "Login",
+            signup: "Sign Up",
+            username: "Username",
+            email: "Email",
+            password: "Password",
+            confirmPassword: "Confirm password",
+            loginBtn: "Login",
+            signupBtn: "Sign Up",
+            switchToSignup: "Don't have an account? ",
+            switchToSignupLink: "Sign Up",
+            switchToLogin: "Already have an account? ",
+            switchToLoginLink: "Login",
+            usernameShort: "Username must be at least 5 characters long",
+            passwordShort: "Password must be at least 5 characters long",
+            emailInvalid: "Email is not valid",
+            passwordsNoMatch: "Passwords do not match",
+            registrationSuccess: "Registration successful!",
+            registrationError: "Registration error",
+            connectionError: "Connection error with server",
+            loginSuccess: "Logged in successfully",
+            wrongUsername: "Wrong username",
+            wrongPassword: "Wrong password",
+            loginFailed: "Login failed"
+        }
+    };
+
+    const t = (key) => messages[lang][key];
 
     const handleClick = async () => {
         if (action === "Sign Up") {
             if (username.length < 5) {
-                setError("Username must be at least 5 characters long");
+                setError(t("usernameShort"));
                 return;
             }
             if (password.length < 5) {
-                setError("Password must be at least 5 characters long");
+                setError(t("passwordShort"));
                 return;
             }
             if(email.length < 5 || !email.includes("@")) {
-                setError("Email is not valid");
+                setError(t("emailInvalid"));
                 return;
             }
             if (password !== confirmPassword) {
-                setError("Passwords do not match");
+                setError(t("passwordsNoMatch"));
                 return;
             }
             try {
@@ -39,14 +95,14 @@ const LoginSignup = () => {
                     body: JSON.stringify({ username, password }),
                 });
                 if (response.ok) {
-                    alert("Registration successful!");
+                    alert(t("registrationSuccess"));
                     setAction("Login");
                 } else {
                     const data = await response.json();
-                    setError(data.message || "Registration error");
+                    setError(data.message || t("registrationError"));
                 }
             } catch {
-                alert("Connection error with server");
+                alert(t("connectionError"));
             }
             return;
         }
@@ -58,36 +114,79 @@ const LoginSignup = () => {
             });
             const data = await response.json();
             if (data.login) {
-                alert("Logged in successfully");
+                alert(t("loginSuccess"));
                 window.location.href = "https://youtube.com";
             } else {
                 if (data.message && data.message.includes("User does not exist")) {
-                    setError("Wrong username");
+                    setError(t("wrongUsername"));
                 } else if (data.message && data.message.includes("Invalid password")) {
-                    setError("Wrong password");
+                    setError(t("wrongPassword"));
                 } else {
-                    setError("Login failed");
+                    setError(t("loginFailed"));
                 }
             }
         } catch {
-            setError("Login failed");
+            setError(t("loginFailed"));
         }
     };
     return (
     <div className='container'>
+        <div style={{ position: 'absolute', top: 20, left: 20, zIndex: 10 }}>
+            <div style={{
+                background: '#fff0f0',
+                borderRadius: '20px',
+                boxShadow: '0 2px 8px rgba(255,0,0,0.08)',
+                padding: '6px 14px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                border: '1px solid #ffb3b3',
+                fontSize: '15px',
+                fontWeight: 500
+            }}>
+                <button
+                    onClick={() => setLang('pl')}
+                    style={{
+                        background: lang === 'pl' ? '#ff1744' : 'transparent',
+                        color: lang === 'pl' ? '#fff' : '#ff1744',
+                        border: 'none',
+                        borderRadius: '12px',
+                        padding: '4px 12px',
+                        cursor: 'pointer',
+                        fontWeight: lang === 'pl' ? 700 : 500,
+                        transition: 'background 0.2s, color 0.2s'
+                    }}
+                >PL</button>
+                <button
+                    onClick={() => setLang('en')}
+                    style={{
+                        background: lang === 'en' ? '#ff1744' : 'transparent',
+                        color: lang === 'en' ? '#fff' : '#ff1744',
+                        border: 'none',
+                        borderRadius: '12px',
+                        padding: '4px 12px',
+                        cursor: 'pointer',
+                        fontWeight: lang === 'en' ? 700 : 500,
+                        transition: 'background 0.2s, color 0.2s'
+                    }}
+                >EN</button>
+            </div>
+        </div>
         <div className="switch-action-container">
             {action === "Login" ? (
                 <div className="switch-action-info">
-                    Don't have an account? <span className="switch-action-link" onClick={() => setAction("Sign Up")}>Sign Up</span>
+                    {t("switchToSignup")}
+                    <span className="switch-action-link" onClick={() => setAction("Sign Up")}>{t("switchToSignupLink")}</span>
                 </div>
             ) : (
                 <div className="switch-action-info">
-                    Already have an account? <span className="switch-action-link" onClick={() => setAction("Login")}>Login</span>
+                    {t("switchToLogin")}
+                    <span className="switch-action-link" onClick={() => setAction("Login")}>{t("switchToLoginLink")}</span>
                 </div>
             )}
         </div>
         <div className="header">
-            <div className="text">{action}</div>
+            <div className="text">{action === "Login" ? t("login") : t("signup")}</div>
             <div className="underline"></div>
         </div>
         {error && <div className="error">{error}</div>}
@@ -99,7 +198,7 @@ const LoginSignup = () => {
                     type="text" 
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder="username"
+                    placeholder={t("username")}
                     required
                     />
                 </div>
@@ -111,7 +210,7 @@ const LoginSignup = () => {
                     <input 
                     type = "email" 
                     value={email} onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
+                    placeholder={t("email")}
                     required
                     />
                 </div>
@@ -124,7 +223,7 @@ const LoginSignup = () => {
                     type="password" 
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="password"
+                    placeholder={t("password")}
                     required
                     />
                 </div>
@@ -137,7 +236,7 @@ const LoginSignup = () => {
                     type="password" 
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="confirm password"
+                    placeholder={t("confirmPassword")}
                     required
                     />
                 </div>
@@ -146,7 +245,7 @@ const LoginSignup = () => {
 
             <div className="ok-btn-container" onClick={handleClick}>
                 <button className="ok-btn">
-                    {action}
+                    {action === "Login" ? t("loginBtn") : t("signupBtn")}
                 </button>
             </div>
         </form>
