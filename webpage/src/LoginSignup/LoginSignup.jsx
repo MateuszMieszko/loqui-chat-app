@@ -39,7 +39,8 @@ const LoginSignup = () => {
             loginSuccess: "Zalogowano pomyślnie",
             wrongUsername: "Nieprawidłowa nazwa użytkownika",
             wrongPassword: "Nieprawidłowe hasło",
-            loginFailed: "Logowanie nie powiodło się"
+            loginFailed: "Logowanie nie powiodło się",
+            takenUsername: "Nazwa użytkownika jest już zajęta"
         },
         en: {
             login: "Login",
@@ -64,7 +65,8 @@ const LoginSignup = () => {
             loginSuccess: "Logged in successfully",
             wrongUsername: "Wrong username",
             wrongPassword: "Wrong password",
-            loginFailed: "Login failed"
+            loginFailed: "Login failed",
+            takenUsername: "Username is already taken"
         }
     };
 
@@ -88,7 +90,8 @@ const LoginSignup = () => {
                 setError(t("passwordsNoMatch"));
                 return;
             }
-            try {
+            
+          try {
                 const response = await fetch("http://localhost:8000/api/users", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -99,7 +102,7 @@ const LoginSignup = () => {
                     setAction("Login");
                 } else {
                     const data = await response.json();
-                    setError(data.message || t("registrationError"));
+                    setError(data.message || t("takenUsername"));
                 }
             } catch {
                 alert(t("connectionError"));
@@ -131,44 +134,13 @@ const LoginSignup = () => {
     };
     return (
     <div className='container'>
-        <div style={{ position: 'absolute', top: 20, left: 20, zIndex: 10 }}>
-            <div style={{
-                background: '#fff0f0',
-                borderRadius: '20px',
-                boxShadow: '0 2px 8px rgba(255,0,0,0.08)',
-                padding: '6px 14px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                border: '1px solid #ffb3b3',
-                fontSize: '15px',
-                fontWeight: 500
-            }}>
-                <button
+        <div className='lang-switch-container'>
+            <div className='lang-btn-container'>
+                <button className={`lang-btn${lang === 'pl' ? ' active' : ''}`}
                     onClick={() => setLang('pl')}
-                    style={{
-                        background: lang === 'pl' ? '#ff1744' : 'transparent',
-                        color: lang === 'pl' ? '#fff' : '#ff1744',
-                        border: 'none',
-                        borderRadius: '12px',
-                        padding: '4px 12px',
-                        cursor: 'pointer',
-                        fontWeight: lang === 'pl' ? 700 : 500,
-                        transition: 'background 0.2s, color 0.2s'
-                    }}
                 >PL</button>
-                <button
-                    onClick={() => setLang('en')}
-                    style={{
-                        background: lang === 'en' ? '#ff1744' : 'transparent',
-                        color: lang === 'en' ? '#fff' : '#ff1744',
-                        border: 'none',
-                        borderRadius: '12px',
-                        padding: '4px 12px',
-                        cursor: 'pointer',
-                        fontWeight: lang === 'en' ? 700 : 500,
-                        transition: 'background 0.2s, color 0.2s'
-                    }}
+                <button className={`lang-btn${lang === 'en' ? ' active' : ''}`}
+                onClick={() => setLang('en')}
                 >EN</button>
             </div>
         </div>
@@ -190,7 +162,7 @@ const LoginSignup = () => {
             <div className="underline"></div>
         </div>
         {error && <div className="error">{error}</div>}
-        <form onSubmit={(e) => e.preventDefault()}>
+        <form onSubmit={(e) => { e.preventDefault(); handleClick(); }}>
             <div className="inputs">
                 <div className="input">
                     <img src={user_logo} alt="User" />
@@ -243,7 +215,7 @@ const LoginSignup = () => {
             </div>
             )}
 
-            <div className="ok-btn-container" onClick={handleClick}>
+            <div className="ok-btn-container">
                 <button className="ok-btn">
                     {action === "Login" ? t("loginBtn") : t("signupBtn")}
                 </button>
