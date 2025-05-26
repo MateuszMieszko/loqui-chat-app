@@ -1,23 +1,52 @@
+import { useEffect, useState } from "react";
 import MessagePlate from "./MessagePlate";
+import axios from "axios";
+
+async function fetchMessages(chatUserId) {
+    try {
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZSIsImlhdCI6MTc0ODIzOTk2NCwiZXhwIjoxODM0NjM5OTY0fQ.vQ_28Mz3Qma6y0dyzE3eQiOiAFqnGjkmHMLin3qpI1A";
+        const response = await axios.get(`http://localhost:8000/api/messages/${chatUserId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
+    }
+    catch (err) {
+        console.error("Error during fetching messages:", err);
+        return [];
+    }
+}
 
 export default function Chat() {
+    const [messages, setMessages] = useState([]);
+    const chatUserId = 2;
+
+    useEffect(() => {
+        const loadMessages = async () => {
+            const response = await fetchMessages(chatUserId);
+            setMessages(response.data["content"]);
+        }
+        loadMessages();
+    }, []);
+
     return (
         <>
             <div className="chat-container">
 
-                <MessagePlate incoming={true}>Hello! How are you?</MessagePlate>
-
-                <MessagePlate incoming={false}>I'm good thanks!</MessagePlate>
-
-                <MessagePlate incoming={true}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit laboriosam omnis, incidunt maiores in quibusdam id esse obcaecati assumenda possimus et! Recusandae dignissimos quos eum molestias odit voluptates incidunt illo.</MessagePlate>
-
-                <MessagePlate incoming={false}>Aszkadaba koszorogoliwa kaszkaj kaszkaj kaszkaj!!! Nomoenomenome czary mary hiper sliper?</MessagePlate>
-
-                <MessagePlate incoming={true}>Hello! How are you?</MessagePlate>
-
-                <MessagePlate incoming={true}>Aj aj aj...</MessagePlate>
-
-                <MessagePlate incoming={false} date={"2025-05-16 08:04:15"}>I'm good thanks!</MessagePlate>
+                {messages.length === 0 ? (
+                    <p>Loading...</p>
+                ) : (
+                    messages.map((msg) => (
+                        <MessagePlate
+                            key={msg.id}
+                            incoming={msg.sender_id == chatUserId}
+                            date={msg.created_at}
+                        >
+                            {msg.content}
+                        </MessagePlate>
+                    ))
+                )}
 
             </div>
         </>

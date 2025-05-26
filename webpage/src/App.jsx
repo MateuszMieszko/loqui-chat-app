@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Chat />
-      <UsersList users={users} />
+      {/* <UsersList users={users} /> */}
     </>
   )
 }
