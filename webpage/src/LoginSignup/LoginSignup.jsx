@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate, Navigate } from 'react-router-dom'
 import './LoginSignup.css'
 
 const user_logo = '/user_logo.png';
@@ -6,7 +7,6 @@ const email_logo = '/email_logo.png';
 const password_logo = '/password_logo.png';
 
 const LoginSignup = () => {
-
     const [action, setAction] = useState("Login");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -14,6 +14,12 @@ const LoginSignup = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const [lang, setLang] = useState("pl");
+    const navigate = useNavigate();
+
+    const isLoggedIn = false;
+    if (isLoggedIn) {
+        return <Navigate to='/' replace />
+    }
 
     const messages = {
         pl: {
@@ -118,7 +124,8 @@ const LoginSignup = () => {
             const data = await response.json();
             if (data.login) {
                 alert(t("loginSuccess"));
-                window.location.href = "https://youtube.com";
+                // window.location.href = "https://youtube.com";
+                navigate('/');
             } else {
                 if (data.message && data.message.includes("User does not exist")) {
                     setError(t("wrongUsername"));
