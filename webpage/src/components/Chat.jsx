@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import MessagePlate from "./MessagePlate";
 import axios from "axios";
+import MessageInput from "./MessageInput";
 
 async function fetchMessages(chatUserId) {
     try {
@@ -22,13 +23,28 @@ export default function Chat() {
     const [messages, setMessages] = useState([]);
     const chatUserId = 2;
 
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    const loadMessages = async () => {
+        const response = await fetchMessages(chatUserId);
+        setMessages(response.data["content"]);
+    }
+
     useEffect(() => {
-        const loadMessages = async () => {
-            const response = await fetchMessages(chatUserId);
-            setMessages(response.data["content"]);
-        }
         loadMessages();
     }, []);
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
+    const handleMessageSent = async (response) => {
+        await loadMessages();
+    };
 
     return (
         <>
@@ -48,7 +64,13 @@ export default function Chat() {
                     ))
                 )}
 
+                <div ref={messagesEndRef} />
             </div>
+
+            <MessageInput
+                chatUserId={chatUserId}
+                onMessageSent={handleMessageSent}
+            />
         </>
     );
 }

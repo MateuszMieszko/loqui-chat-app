@@ -1,3 +1,9 @@
+* *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -44,4 +50,45 @@
   margin-top: 4px;
   opacity: 0.6;
   text-align: right;
+}
+
+.message-input {
+  display: flex;
+  padding: 12px;
+  gap: 8px;
+  background-color: #ffeaea;
+  border-top: 1px solid #ffcccc;
+
+  position: sticky;
+  bottom: 0;
+}
+
+.message-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ffbfbf;
+  background-color: #fffafa;
+  color: #333;
+  font-size: 14px;
+  outline: none;
+}
+
+.message-input input::placeholder {
+  color: #888;
+}
+
+.message-input button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ff5252;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.message-input button:hover { 
+  background-color: #ff6b6b;
 }

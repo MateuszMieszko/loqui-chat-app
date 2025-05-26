@@ -9,11 +9,12 @@ async function findConversation(req, res, next) {
 }
 
 async function sendMessage(req, res, next) {
-    const { sender_id, reciver_id, content } = req.params;
-    if (rows.length == 0) return res.status(406).json({ message: "406 not acceptable." }); 
+    const senderId = req.sessionUser.id;
+    const { content, receiver_id } = req.body;
+    // if (rows.length == 0) return res.status(406).json({ message: "406 not acceptable." }); 
     
     const rows = await query('INSERT INTO messages (sender_id, receiver_id, content) VALUES (?,?,?)',
-         [sender_id, reciver_id, content]);
+         [senderId, receiver_id, content]);
     if (rows.length == 0) return next();
     return res.status(201).send({ message : "201 New message created successfully." });
 }
