@@ -4,12 +4,18 @@
   box-sizing: border-box;
 }
 
+.chat-full {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .chat-container {
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding: 16px;
-  max-width: 600px;
+  /* max-width: 600px; */
   margin: auto;
   background-color: #fff0f0;
 

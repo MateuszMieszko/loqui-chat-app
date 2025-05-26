@@ -47,7 +47,7 @@ export default function Chat() {
     };
 
     return (
-        <>
+        <div className="chat-full">
             <div className="chat-container">
 
                 {messages.length === 0 ? (
@@ -71,6 +71,6 @@ export default function Chat() {
                 chatUserId={chatUserId}
                 onMessageSent={handleMessageSent}
             />
-        </>
+        </div>
     );
 }

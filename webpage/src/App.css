@@ -3,54 +3,9 @@
   border-radius: 3px;
   border-style: dotted;
   height: calc(100vh - 32px);
-  width: 500px;
+  /* width: 500px; */
 
   /* overflow: hidden; */
   display: flex;
   flex-direction: column;
-}
-
-.usersList {
-  display: flex;
-  flex-direction: column;
-  padding: 3px;
-  border:inherit;
-  height:100%;
-}
-
-.searchBar {
-  border:inherit;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  padding: 5px;
-}
-
-.userPlates {
-  flex: 1;
-  overflow-y: auto;
-}
-
-.userPlate {
-  display:flex;
-  gap: 1em;
-  justify-content:center;
-  align-items:center;
-  flex-direction:row;
-  border-radius: 3px;
-  border-style: dotted;
-  padding:0.5em;
-}
-
-.userIcon {
-  left: 0;
-  width:2.5em;
-  height:2.5em;
-  border:inherit;
-}
-
-.userNametag {
-  border:inherit;
-  flex: 1;
-  text-align: center;
 }
