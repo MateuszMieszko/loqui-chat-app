@@ -31,7 +31,12 @@ export default function Chat({ chatUserId, token }) {
 
     const loadMessages = useCallback(async () => {
         const response = await fetchMessages(chatUserId, token);
-        setMessages(response.data["content"]);
+        const newMessages = response.data?.content || [];
+        setMessages((prevMessages) => {
+            const sameLength = prevMessages.length === newMessages.length;
+            const sameContent = sameLength && prevMessages.every((msg, i) => msg.id === newMessages[i].id);
+            return sameContent ? prevMessages : newMessages;
+        });
     }, [chatUserId, token]);
 
     useEffect(() => {
@@ -49,6 +54,10 @@ export default function Chat({ chatUserId, token }) {
 
         return () => clearInterval(intervalId);
     }, [loadMessages]);
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     const handleMessageSent = async () => {
         await loadMessages();

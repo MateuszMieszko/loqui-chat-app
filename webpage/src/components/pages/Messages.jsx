@@ -5,24 +5,34 @@ import "../Chat.css"
 import "../Users.css"
 import { Navigate } from "react-router-dom";
 import LogoutButton from "../LogoutButton";
+import { useEffect, useState } from "react";
+import { isLoggedIn } from "../../utils/isLoggedIn";
 
 export default function Messages() {
-    const isLoggedIn = true;
-    if (!isLoggedIn) {
-        return <Navigate to='/login' replace />
-    }
+    const [authorized, setAuthorized] = useState(null);
+    useEffect(() => {
+        const checkAuth = async () => {
+            const result = await isLoggedIn();
+            setAuthorized(result);
+        };
+        checkAuth();
+    }, []);
+    if (authorized === null) return <div>Ładowanie...</div>;
+    if (authorized === false) return <Navigate to='/login' replace />;
+    const token = localStorage.getItem('token');
 
     const users = [ "Zuzol", "Tofik", "Mati", "Patryk", "Kuba"];
-    const token = localStorage.getItem('token'); // || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZSIsImlhdCI6MTc0ODIzOTk2NCwiZXhwIjoxODM0NjM5OTY0fQ.vQ_28Mz3Qma6y0dyzE3eQiOiAFqnGjkmHMLin3qpI1A";
-    if (!token) {
-        return <Navigate to='/login' replace />
-    }
 
     return (
         <div className="messagesPage">
             <UsersList users={users} />
             <Chat
                 key={1}
+                chatUserId={1}
+                token={token}
+            />
+            <Chat
+                key={2}
                 chatUserId={2}
                 token={token}
             />

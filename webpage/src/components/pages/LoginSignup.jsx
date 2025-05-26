@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, Navigate } from 'react-router-dom'
 import './LoginSignup.css'
+import { isLoggedIn } from '../../utils/isLoggedIn';
 
 const user_logo = '/user_logo.png';
 const email_logo = '/email_logo.png';
@@ -16,10 +17,16 @@ const LoginSignup = () => {
     const [lang, setLang] = useState("pl");
     const navigate = useNavigate();
 
-    const isLoggedIn = false;
-    if (isLoggedIn) {
-        return <Navigate to='/' replace />
-    }
+    const [authorized, setAuthorized] = useState(null);
+    useEffect(() => {
+        const checkAuth = async () => {
+            const result = await isLoggedIn();
+            setAuthorized(result);
+        };
+        checkAuth();
+    }, []);
+    if (authorized === null) return <div>Ładowanie...</div>;
+    if (authorized === true) return <Navigate to='/' replace />;
 
     const messages = {
         pl: {
