@@ -123,7 +123,7 @@ const LoginSignup = () => {
             });
             const data = await response.json();
             if (data.login) {
-                alert(t("loginSuccess"));
+                // alert(t("loginSuccess"));
                 // window.location.href = "https://youtube.com";
                 localStorage.setItem('token', data.token);
                 navigate('/');

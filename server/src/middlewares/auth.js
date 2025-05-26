@@ -11,12 +11,15 @@ export async function isLogged(req, res, next) {
         const decoded = await verifyToken(token);
         if (decoded === false) return res.status(401).json({ message: "401 Invalid token." });
         if (decoded === null) return res.status(401).json({ message: "401 Token expired." });
-        const rows = await query("SELECT * FROM users WHERE id = ? AND deleted = 1", [decoded.id]);
-        if (rows.length > 0) return res.status(401).json({ message: "401 Deleted user." });
-        req.sessionUser = decoded;
-        next();
+        const rows = await query("SELECT * FROM users WHERE id = ?", [decoded.id]);
+        if (rows.length == 0 || rows[0].deleted) return res.status(401).json({ message: "401 Deleted user." });
+        req.sessionUser = {
+            id: rows[0].id,
+            username: rows[0].username,
+        };
+        return next();
     }
     catch (err) {
-        res.status(401).json({ message: "401 Access denied. No token provided." });
+        return res.status(401).json({ message: "401 Access denied. No token provided." });
     }
 }

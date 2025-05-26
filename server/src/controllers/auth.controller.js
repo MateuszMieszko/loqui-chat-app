@@ -27,7 +27,7 @@ async function login(req, res, next) {
     const id = user.id;
     const token = jwt.sign({ id, username }, JWT_SECRET_KEY, { expiresIn: JWT_LIFETIME });
 
-    return res.json({ login: true, id, username, token });
+    return res.status(201).json({ login: true, id, username, token });
 }
 
 async function logout(req, res, next) {
@@ -43,10 +43,20 @@ async function logout(req, res, next) {
 
     await addTokenToBlacklist(token);
 
-    return res.json({ message: "Token added to blacklist." });
+    return res.status(200).json({ message: "Token added to blacklist." });
+}
+
+async function checkIfLoggedIn(req, res, next) {
+    return res.status(200).json({
+        login: true,
+        message: "200 User is logged in.",
+        id: req.sessionUser.id,
+        username: req.sessionUser.username
+    });
 }
 
 export default {
     login,
-    logout
+    logout,
+    checkIfLoggedIn
 }

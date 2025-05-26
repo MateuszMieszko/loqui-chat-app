@@ -9,6 +9,9 @@ const api = Router();
 api.post('/', catchAsync(authController.login));
 
 // DELETE /auth
-api.delete('/', isLogged, catchAsync(authController.logout))
+api.delete('/', isLogged, catchAsync(authController.logout));
+
+// GET /auth
+api.get('/', isLogged, catchAsync(authController.checkIfLoggedIn));
 
 export default api;
