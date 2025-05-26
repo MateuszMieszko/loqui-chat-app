@@ -3,7 +3,8 @@ import { query } from "../utils/databaseQuery.js";
 async function findConversation(req, res, next) {
     // parametry id uzytkownika
     const { id } = req.params;
-    const rows = await query("SELECT * FROM messages WHERE sender_id=? OR receiver_id=?", [id, id]);
+    const userId = req.sessionUser.id;
+    const rows = await query("SELECT * FROM messages WHERE (sender_id=? AND receiver_id=?) OR (receiver_id=? AND sender_id=?)", [id, userId, id, userId]);
     return res.status(200).send({ content: rows });
 }
 
