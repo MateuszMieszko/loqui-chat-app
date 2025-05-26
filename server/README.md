@@ -2,7 +2,7 @@
 
 ## GET /api/users
 > Pobierz dane wszystkich użytkowników.
-Dostępne tylko dla zalogowanego użytkownika.
+> Dostępne tylko dla zalogowanego użytkownika.
 
 ### Przykładowe zapytanie
 **GET /api/users**
@@ -37,7 +37,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ## GET /api/users/:id
 > Pobierz dane użytkownika o podanym id.
-Dostępne tylko dla zalogowanego użytkownika.
+> Dostępne tylko dla zalogowanego użytkownika.
 
 ### Przykładowe zapytanie
 **GET /api/users/2**
@@ -58,7 +58,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ## POST /api/users
 > Stwórz nowego użytkownika.
-Dostępne tylko dla niezalogowanego użytkownika.
+> Dostępne tylko dla niezalogowanego użytkownika.
 
 ### Przykładowe zapytanie
 **POST /api/users**
@@ -80,7 +80,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ## DELETE /api/users
 > Ustaw użytkownikowi o podanym id status na usunięty.
-Dostępne tylko dla użytkownika o danym id.
+> Dostępne tylko dla użytkownika o danym id.
 
 ### Przykładowe zapytanie
 **DELETE /api/users**
@@ -104,7 +104,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ## PUT /api/users
 > Aktualizuj dane użytkownika o podanym id.
-Dostępne tylko dla użytkownika o danym id.
+> Dostępne tylko dla użytkownika o danym id.
 
 ### Przykładowe zapytanie
 **PUT /api/users**
@@ -126,8 +126,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 ```
 
 ## GET /api/auth
-> Pobierz dane zalogowanego użytkownika
-Dostępne tylko dla zalogowanych.
+> Pobierz dane zalogowanego użytkownika.
+> Dostępne tylko dla zalogowanych.
 
 ### Przykładowe zapytanie
 **GET /api/auth**
@@ -154,7 +154,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ## POST /api/auth
 > Zaloguj wybranego użytkownika.
-Dostępne tylko dla niezalogowanych.
+> Dostępne tylko dla niezalogowanych.
 
 ### Przykładowe zapytanie
 **POST /api/auth**
@@ -194,7 +194,7 @@ Dostępne tylko dla niezalogowanych.
 
 ## DELETE /api/auth
 > Wyloguj obecnie zalogowanego użytkownika.
-Dostępne tylko dla zalogowanego użytkownika.
+> Dostępne tylko dla zalogowanego użytkownika.
 
 ### Przykładowe zapytanie
 **POST /api/auth**
@@ -224,7 +224,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ## GET /api/messages/:id
 > Pobierz wiadomości wysłane między użytkownikiem o danym id oraz zalogowanym użytkownikiem.
-Dostępne tylko dla zalogowanego użytkownika.
+> Dostępne tylko dla zalogowanego użytkownika.
 
 ### Przykładowe zapytanie
 **GET /api/messages/2**
@@ -279,7 +279,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ## POST /api/messages
 > Utwórz wiadomość wysłaną przez zalogowanego użytkownika do użytkownika o podanym id.
-Dostępne tylko dla zalogowanego użytkownika.
+> Dostępne tylko dla zalogowanego użytkownika.
 
 ### Przykładowe zapytanie
 **POST /api/messages**
