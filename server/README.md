@@ -6,6 +6,7 @@
 
 ### Przykładowe zapytanie
 **GET /api/users**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowa odpowiedź
@@ -41,6 +42,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowe zapytanie
 **GET /api/users/2**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowa odpowiedź
@@ -62,6 +64,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowe zapytanie
 **POST /api/users**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 ```json
 {
@@ -84,6 +87,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowe zapytanie
 **DELETE /api/users**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowa odpowiedź
@@ -108,6 +112,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowe zapytanie
 **PUT /api/users**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 ```json
 {
@@ -131,6 +136,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowe zapytanie
 **GET /api/auth**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowa odpowiedź
@@ -198,6 +204,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowe zapytanie
 **POST /api/auth**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowa odpowiedź
@@ -228,6 +235,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowe zapytanie
 **GET /api/messages/2**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowa odpowiedź
@@ -283,6 +291,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1N...
 
 ### Przykładowe zapytanie
 **POST /api/messages**
+
 Authorization: Bearer eyJhbGciOiJIUzI1N...
 ```json
 {
