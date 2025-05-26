@@ -1,0 +1,26 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+export default function ChatHeader({ chatUserId, token }) {
+    const [username, setUsername] = useState("");
+
+    useEffect(() => {
+        const loadUserData = async () => {
+            const response = await axios.get(`http://localhost:8000/api/users/${chatUserId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            setUsername(response.data.user_data.username)
+        };
+        loadUserData();
+    });
+
+    return (
+        <>
+            <div className="chat-header">
+                <p className="chat-header-username">{username}</p>
+            </div>
+        </>
+    );
+}

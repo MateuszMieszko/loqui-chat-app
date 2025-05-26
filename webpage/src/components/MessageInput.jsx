@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios";
 
-export default function MessageInput({ chatUserId, onMessageSent }) {
+export default function MessageInput({ chatUserId, onMessageSent, token }) {
     const [message, setMessage] = useState("");
 
     const handleSend = async () => {
@@ -9,7 +9,6 @@ export default function MessageInput({ chatUserId, onMessageSent }) {
         if (!trimmed) return;
 
         try {
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZSIsImlhdCI6MTc0ODIzOTk2NCwiZXhwIjoxODM0NjM5OTY0fQ.vQ_28Mz3Qma6y0dyzE3eQiOiAFqnGjkmHMLin3qpI1A";
             const response = await axios.post("http://localhost:8000/api/messages", {
                 receiver_id: chatUserId,
                 content: trimmed,

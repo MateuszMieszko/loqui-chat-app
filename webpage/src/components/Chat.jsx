@@ -2,10 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import MessagePlate from "./MessagePlate";
 import axios from "axios";
 import MessageInput from "./MessageInput";
+import ChatHeader from "./ChatHeader";
+import './Chat.css'
 
-async function fetchMessages(chatUserId) {
+async function fetchMessages(chatUserId, token) {
     try {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZSIsImlhdCI6MTc0ODIzOTk2NCwiZXhwIjoxODM0NjM5OTY0fQ.vQ_28Mz3Qma6y0dyzE3eQiOiAFqnGjkmHMLin3qpI1A";
         const response = await axios.get(`http://localhost:8000/api/messages/${chatUserId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -19,18 +20,17 @@ async function fetchMessages(chatUserId) {
     }
 }
 
-export default function Chat() {
+export default function Chat({ chatUserId, token }) {
     const [messages, setMessages] = useState([]);
-    const chatUserId = 2;
 
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        messagesEndRef.current?.scrollIntoView({ behavior: "auto" }); // zamiast auto może być smooth
     };
 
     const loadMessages = async () => {
-        const response = await fetchMessages(chatUserId);
+        const response = await fetchMessages(chatUserId, token);
         setMessages(response.data["content"]);
     }
 
@@ -47,30 +47,38 @@ export default function Chat() {
     };
 
     return (
-        <div className="chat-full">
+        <>
             <div className="chat-container">
+                <ChatHeader
+                    chatUserId={chatUserId}
+                    token={token}
+                />
 
-                {messages.length === 0 ? (
-                    <p>Loading...</p>
-                ) : (
-                    messages.map((msg) => (
-                        <MessagePlate
-                            key={msg.id}
-                            incoming={msg.sender_id == chatUserId}
-                            date={msg.created_at}
-                        >
-                            {msg.content}
-                        </MessagePlate>
-                    ))
-                )}
+                <div className="messages-container">
 
-                <div ref={messagesEndRef} />
+                    {messages.length === 0 ? (
+                        <p>Loading...</p>
+                    ) : (
+                        messages.map((msg) => (
+                            <MessagePlate
+                                key={msg.id}
+                                incoming={msg.sender_id == chatUserId}
+                                date={msg.created_at}
+                            >
+                                {msg.content}
+                            </MessagePlate>
+                        ))
+                    )}
+
+                    <div ref={messagesEndRef} />
+                </div>
+
+                <MessageInput
+                    chatUserId={chatUserId}
+                    onMessageSent={handleMessageSent}
+                    token={token}
+                />
             </div>
-
-            <MessageInput
-                chatUserId={chatUserId}
-                onMessageSent={handleMessageSent}
-            />
-        </div>
+        </>
     );
 }

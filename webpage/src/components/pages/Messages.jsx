@@ -9,7 +9,11 @@ export default function Messages() {
     return (
         <div className="messagesPage">
             <UsersList users={users} />
-            <Chat />
+            <Chat
+                key={1}
+                chatUserId={2}
+                token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZSIsImlhdCI6MTc0ODIzOTk2NCwiZXhwIjoxODM0NjM5OTY0fQ.vQ_28Mz3Qma6y0dyzE3eQiOiAFqnGjkmHMLin3qpI1A"
+            />
         </div>
     )
 }
