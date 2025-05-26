@@ -5,9 +5,25 @@ import "../Chat.css"
 import "../Users.css"
 import { Navigate } from "react-router-dom";
 import LogoutButton from "../LogoutButton";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { isLoggedIn } from "../../utils/isLoggedIn";
 import ChatTests from "../ChatTests";
+import axios from "axios";
+
+async function fetchUsers(token) {
+    try {
+        const response = await axios.get(`http://localhost:8000/api/users`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
+    }
+    catch (err) {
+        console.error("Error during fetching users:", err);
+        return [];
+    }
+}
 
 export default function Messages() {
     const [authorized, setAuthorized] = useState(null);
@@ -18,11 +34,25 @@ export default function Messages() {
         };
         checkAuth();
     }, []);
-    if (authorized === null) return <div>Ładowanie...</div>;
-    if (authorized === false) return <Navigate to='/login' replace />;
-    const token = localStorage.getItem('token');
 
-    const users = [ "Zuzol", "Tofik", "Mati", "Patryk", "Kuba"];
+    const token = localStorage.getItem('token');
+    const [ users, setUsers ] = useState([]);
+
+    const loadUsers = useCallback(async () => {
+        const response = await fetchUsers(token);
+        console.log(response.data.users_data)
+        setUsers(response.data.users_data);
+    }, [token]);
+
+    useEffect(() => {
+        const load = async () => {
+            await loadUsers();
+        }
+        load();
+    }, [self, loadUsers]);
+
+    if (authorized === null || !users) return <div>Ładowanie...</div>;
+    if (authorized === false) return <Navigate to='/login' replace />;
 
     return (
         <div className="messagesPage">
