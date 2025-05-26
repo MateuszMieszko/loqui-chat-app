@@ -35,7 +35,11 @@ export default function Chat({ chatUserId, token }) {
     }, [chatUserId, token]);
 
     useEffect(() => {
-        loadMessages();
+        const load = async () => {
+            await loadMessages();
+            scrollToBottom();
+        }
+        load();
     }, [loadMessages]);
 
     useEffect(() => {
@@ -46,12 +50,11 @@ export default function Chat({ chatUserId, token }) {
         return () => clearInterval(intervalId);
     }, [loadMessages]);
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
-
     const handleMessageSent = async () => {
         await loadMessages();
+        setTimeout(() => {
+            scrollToBottom();
+        }, 0);
     };
 
     return (
