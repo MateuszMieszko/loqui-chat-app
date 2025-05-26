@@ -10,10 +10,11 @@ export default function UsersList({ users, onClick=undefined }) {
         const newText = e.target.value;
         let newUsers = [[], [], [], [], []];
         for ( let user of users ) {
-            if(user.substring(0, newText.length) === newText) newUsers[0].push(user);
-            else if(user.toLowerCase().substring(0, newText.length) === newText.toLowerCase()) newUsers[1].push(user);
-            else if(user.includes(newText)) newUsers[2].push(user);
-            else if(user.toLowerCase().includes(newText.toLowerCase())) newUsers[2].push(user);
+            let username = user.username;
+            if(username.substring(0, newText.length) === newText) newUsers[0].push(user);
+            else if(username.toLowerCase().substring(0, newText.length) === newText.toLowerCase()) newUsers[1].push(user);
+            else if(username.includes(newText)) newUsers[2].push(user);
+            else if(username.toLowerCase().includes(newText.toLowerCase())) newUsers[2].push(user);
             else newUsers[3].push(user);
         }
         setSearchedUsers(newUsers[0].concat(newUsers[1]).concat(newUsers[2]).concat(newUsers[3]));
@@ -25,7 +26,7 @@ export default function UsersList({ users, onClick=undefined }) {
             >
                 <SearchBar handleChange={handleChange}/>
                 <div className="userPlates">
-                    {searchedUsers.map((user) => <UserPlate onClick={onClick} key={user}>{user}</UserPlate>)}
+                    {searchedUsers.map((user) => <UserPlate onClick={onClick} key={user.id} userId={user.id}>{user.username}</UserPlate>)}
                 </div>
             </div>
     )
