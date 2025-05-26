@@ -31,7 +31,11 @@ async function login(req, res, next) {
 }
 
 async function logout(req, res, next) {
-    const token = req.body.token;
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return res.status(401).json({ message: "401 Access denied. No token provided." });
+    }
+    const token = authHeader.split(" ")[1];
 
     if (!token) {
         return res.status(400).json({ message: "400 No token in request." });

@@ -125,6 +125,7 @@ const LoginSignup = () => {
             if (data.login) {
                 alert(t("loginSuccess"));
                 // window.location.href = "https://youtube.com";
+                localStorage.setItem('token', data.token);
                 navigate('/');
             } else {
                 if (data.message && data.message.includes("User does not exist")) {
