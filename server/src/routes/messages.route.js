@@ -6,9 +6,9 @@ import { isLogged } from "../middlewares/auth.js";
 const api = Router();
 
 // GET /messages/:id
-api.get('/:id',isLogged, catchAsync(messagesController.findConversation));
+api.get('/:id', isLogged, catchAsync(messagesController.findConversation));
 
 // POST send message
-api.post('/',isLogged, catchAsync(messagesController.sendMessage));
+api.post('/', isLogged, catchAsync(messagesController.sendMessage));
 
 export default api;
