@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import MessagePlate from "./MessagePlate";
 import axios from "axios";
 import MessageInput from "./MessageInput";
@@ -29,14 +29,14 @@ export default function Chat({ chatUserId, token }) {
         messagesEndRef.current?.scrollIntoView({ behavior: "auto" }); // zamiast auto może być smooth
     };
 
-    const loadMessages = async () => {
+    const loadMessages = useCallback(async () => {
         const response = await fetchMessages(chatUserId, token);
         setMessages(response.data["content"]);
-    }
+    }, [chatUserId, token]);
 
     useEffect(() => {
         loadMessages();
-    }, [chatUserId, token]);
+    }, [loadMessages]);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -44,7 +44,7 @@ export default function Chat({ chatUserId, token }) {
         }, 5000);
 
         return () => clearInterval(intervalId);
-    }, [chatUserId, token]);
+    }, [loadMessages]);
 
     useEffect(() => {
         scrollToBottom();
