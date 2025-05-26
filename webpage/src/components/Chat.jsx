@@ -36,13 +36,21 @@ export default function Chat({ chatUserId, token }) {
 
     useEffect(() => {
         loadMessages();
-    }, []);
+    }, [chatUserId, token]);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            loadMessages();
+        }, 5000);
+
+        return () => clearInterval(intervalId);
+    }, [chatUserId, token]);
 
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
 
-    const handleMessageSent = async (response) => {
+    const handleMessageSent = async () => {
         await loadMessages();
     };
 
