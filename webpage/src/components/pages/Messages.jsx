@@ -7,6 +7,7 @@ import { Navigate } from "react-router-dom";
 import LogoutButton from "../LogoutButton";
 import { useEffect, useState } from "react";
 import { isLoggedIn } from "../../utils/isLoggedIn";
+import ChatTests from "../ChatTests";
 
 export default function Messages() {
     const [authorized, setAuthorized] = useState(null);
@@ -28,14 +29,10 @@ export default function Messages() {
             <UsersList users={users} />
             <Chat
                 key={1}
-                chatUserId={1}
-                token={token}
-            />
-            <Chat
-                key={2}
                 chatUserId={2}
                 token={token}
             />
+            {/* <ChatTests /> */}
             <LogoutButton />
         </div>
     )
