@@ -1,4 +1,5 @@
 import './App.css'
+import './components/Chat.css'
 import UsersList from "./components/UsersList";
 import Chat from "./components/Chat";
 
