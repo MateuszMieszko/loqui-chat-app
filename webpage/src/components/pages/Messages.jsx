@@ -59,6 +59,18 @@ export default function Messages() {
         setChatUserId(id);
     }
 
+    // load from localStorage
+    useEffect(() => {
+        const lastMessaged = localStorage.getItem('lastMessaged');
+        if (lastMessaged) {
+            setChatUserId(lastMessaged);
+        }
+    }, []);
+
+    useEffect(() => {
+        if(chatUserId) localStorage.setItem('lastMessaged', chatUserId);
+    }, [chatUserId]);
+
     if (authorized === null || !users) return <div>Ładowanie...</div>;
     if (authorized === false) return <Navigate to='/login' replace />;
 
