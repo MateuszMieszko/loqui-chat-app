@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios";
 
-export default function MessageInput({ chatUserId, onMessageSent, token }) {
+export default function MessageInput({ chatUserId, onMessageSent, token, chatInputRef }) {
     const [message, setMessage] = useState("");
 
     const handleSend = async () => {
@@ -40,6 +40,7 @@ export default function MessageInput({ chatUserId, onMessageSent, token }) {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyPress}
+                    ref={chatInputRef}
                 />
                 <button onClick={handleSend}>Wyślij</button>
             </div>
