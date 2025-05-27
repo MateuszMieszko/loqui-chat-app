@@ -1,4 +1,4 @@
-import defaultIcon from '../img/defaultUser.png'
+import defaultIcon from '../assets/defaultUser.png'
 
 function UserIcon({ icon=defaultIcon, alt="User", onClick=undefined }) {
     return (
