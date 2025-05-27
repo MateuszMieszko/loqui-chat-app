@@ -23,21 +23,33 @@ async function fetchMessages(chatUserId, token) {
 
 export default function Chat({ chatUserId, token, chatInputRef }) {
     const [messages, setMessages] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "auto" }); // zamiast auto może być smooth
+        messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
     };
 
     const loadMessages = useCallback(async () => {
-        const response = await fetchMessages(chatUserId, token);
-        const newMessages = response.data?.content || [];
-        setMessages((prevMessages) => {
-            const sameLength = prevMessages.length === newMessages.length;
-            const sameContent = sameLength && prevMessages.every((msg, i) => msg.id === newMessages[i].id);
-            return sameContent ? prevMessages : newMessages;
-        });
+        setError(null);
+        setLoading(true);
+        try {
+            const response = await fetchMessages(chatUserId, token);
+            if (!response || !response.data) throw new Error("No response");
+            const newMessages = response.data?.content || [];
+            setMessages((prevMessages) => {
+                const sameLength = prevMessages.length === newMessages.length;
+                const sameContent = sameLength && prevMessages.every((msg, i) => msg.id === newMessages[i].id);
+                return sameContent ? prevMessages : newMessages;
+            });
+        } catch (err) {
+            setMessages([]);
+            setError("Failed to load messages.");
+        } finally {
+            setLoading(false);
+        }
     }, [chatUserId, token]);
 
     useEffect(() => {
@@ -77,8 +89,14 @@ export default function Chat({ chatUserId, token, chatInputRef }) {
 
                 <div className="messages-container">
 
-                    {messages.length === 0 ? (
+                    {chatUserId === null ? (
+                        <p>Please select a user first</p>
+                    ) : loading ? (
                         <p>Loading...</p>
+                    ) : error ? (
+                        <p style={{ color: "var(--main)" }}>{error}</p>
+                    ) : messages.length === 0 ? (
+                        <p>No messages yet.</p>
                     ) : (
                         messages.map((msg) => (
                             <MessagePlate
