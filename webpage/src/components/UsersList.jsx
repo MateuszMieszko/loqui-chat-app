@@ -18,8 +18,6 @@ export default function UsersList({ users, onClick=undefined }) {
             else newUsers[3].push(user);
         }
         setSearchedUsers(newUsers[0].concat(newUsers[1]).concat(newUsers[2]).concat(newUsers[3]));
-        console.log("users: ", users);
-        console.log("searchedUsers: ", searchedUsers);
     }
 
     function handleChange(e) {

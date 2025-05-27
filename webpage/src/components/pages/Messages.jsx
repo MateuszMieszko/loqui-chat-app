@@ -40,7 +40,6 @@ export default function Messages() {
 
     const loadUsers = useCallback(async () => {
         const response = await fetchUsers(token);
-        console.log(response.data.users_data)
         setUsers(response.data.users_data);
     }, [token]);
 
