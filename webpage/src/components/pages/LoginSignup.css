@@ -1,7 +1,7 @@
 /* LoginSignup.css - jasna czerwień, nowoczesny styl */
 
 body {
-  background: linear-gradient(120deg, #ffebee 0%, #ffcdd2 100%);
+  background: linear-gradient(120deg, var(--white) 0%, var(--lighter-7) 100%);
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -14,9 +14,9 @@ body {
 .container {
   width: 400px;
   margin: 60px auto;
-  background: #fff;
+  background: var(--white);
   border-radius: 18px;
-  box-shadow: 0 4px 32px rgba(255, 0, 0, 0.10), 0 1.5px 8px rgba(255, 0, 0, 0.08);
+  box-shadow: 0 4px 32px var(--red-10p), 0 1.5px 8px var(--red-10p);
   padding: 36px 32px 32px 32px;
   font-family: 'Segoe UI', Arial, sans-serif;
 }
@@ -29,14 +29,14 @@ body {
 .text {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #e53935;
+  color: var(--main);
   letter-spacing: 1px;
 }
 
 .underline {
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, #ff5252 0%, #e53935 100%);
+  background: linear-gradient(90deg, var(--lighter-2) 0%, var(--main) 100%);
   border-radius: 2px;
   margin: 10px auto 0 auto;
 }
@@ -51,30 +51,30 @@ body {
 .switch-action {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #e53935;
-  background: #fff0f0;
+  color: var(--main);
+  background: var(--white);
   border-radius: 6px;
   padding: 8px 28px;
   cursor: pointer;
-  border: 1.5px solid #ff5252;
+  border: 1.5px solid var(--lighter-2);
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 
 .switch-action.active {
-  background: linear-gradient(90deg, #ff5252 0%, #e53935 100%);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(255, 82, 82, 0.10);
+  background: linear-gradient(90deg, var(--lighter-2) 0%, var(--main) 100%);
+  color: var(--white);
+  box-shadow: 0 2px 8px var(--red-10p);
 }
 
 .switch-action-info {
   text-align: center;
   margin-bottom: 18px;
   font-size: 1rem;
-  color: #b71c1c;
+  color: var(--darker);
 }
 
 .switch-action-link {
-  color: #e53935;
+  color: var(--main);
   font-weight: 600;
   cursor: pointer;
   text-decoration: underline;
@@ -82,7 +82,7 @@ body {
   transition: color 0.2s;
 }
 .switch-action-link:hover {
-  color: #ff5252;
+  color: var(--lighter-2);
 }
 
 .inputs {
@@ -92,22 +92,22 @@ body {
 .input {
   display: flex;
   align-items: center;
-  background: #fff0f0;
+  background: var(--white);
   border-radius: 8px;
-  border: 1.5px solid #ff5252;
+  border: 1.5px solid var(--lighter-2);
   padding: 10px 14px;
   transition: box-shadow 0.2s;
 }
 
 .input:focus-within {
-  box-shadow: 0 0 0 2px #ff5252;
+  box-shadow: 0 0 0 2px var(--lighter-2);
 }
 
 .input img {
   width: 26px;
   height: 26px;
   margin-right: 12px;
-  filter: drop-shadow(0 0 2px #ff5252);
+  filter: drop-shadow(0 0 2px var(--lighter-2));
 }
 
 .input input {
@@ -115,7 +115,7 @@ body {
   outline: none;
   background: transparent;
   font-size: 1.1rem;
-  color: #b71c1c;
+  color: var(--darker);
   width: 100%;
   padding: 6px 0;
 }
@@ -127,19 +127,19 @@ body {
 }
 
 .submit {
-  background: linear-gradient(90deg, #ff5252 0%, #e53935 100%);
-  color: #fff;
+  background: linear-gradient(90deg, var(--lighter-2) 0%, var(--main) 100%);
+  color: var(--white);
   font-weight: 600;
   padding: 12px 36px;
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(255, 82, 82, 0.10);
+  box-shadow: 0 2px 8px var(--red-10p);
   border: none;
   transition: background 0.2s, transform 0.1s;
 }
 
 .submit:hover {
-  background: linear-gradient(90deg, #e53935 0%, #ff5252 100%);
+  background: linear-gradient(90deg, var(--main) 0%, var(--lighter-2) 100%);
   transform: translateY(-2px) scale(1.03);
 }
 
@@ -150,20 +150,20 @@ body {
 }
 
 .ok-btn {
-  background: linear-gradient(90deg, #ff5252 0%, #e53935 100%);
-  color: #fff;
+  background: linear-gradient(90deg, var(--lighter-2) 0%, var(--main) 100%);
+  color: var(--white);
   font-weight: 600;
   padding: 12px 48px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
   font-size: 1.1rem;
-  box-shadow: 0 2px 8px rgba(255, 82, 82, 0.10);
+  box-shadow: 0 2px 8px var(--red-10p);
   transition: background 0.2s, transform 0.1s;
 }
 
 .ok-btn:hover {
-  background: linear-gradient(90deg, #e53935 0%, #ff5252 100%);
+  background: linear-gradient(90deg, var(--main) 0%, var(--lighter-2) 100%);
   transform: translateY(-2px) scale(1.03);
 }
 
@@ -171,6 +171,7 @@ body {
   .container {
     width: 98vw;
     padding: 18px 4vw 24px 4vw;
+    background: var(--white);
   }
   .submit {
     padding: 10px 0;
@@ -180,14 +181,14 @@ body {
 }
 
 .gray{
-    background: #EEEEEE;
-    color: #666666;
+    background: var(--white);
+    color: var(--grey);
 }
 
 .error {
-  color: #e53935;
-  background: #ffebee;
-  border: 1.5px solid #e53935;
+  color: var(--main);
+  background: var(--white);
+  border: 1.5px solid var(--main);
   border-radius: 6px;
   padding: 10px 16px;
   margin: 16px 0;
@@ -201,13 +202,13 @@ body {
   padding: 4px 12px;
   cursor: pointer;
   font-weight: 500;
-  color: #ff1744;
+  color: var(--lighter-1);
   background: transparent;
   transition: background 0.2s, color 0.2s;
 }
 .lang-btn.active {
-  background: #ff1744;
-  color: #fff;
+  background: var(--lighter-1);
+  color: var(--white);
   font-weight: 700;
 }
 .lang-switch-container {
@@ -215,14 +216,14 @@ body {
   top: 20px; 
   left: 20px; 
   z-index: 10;
-  background: #fff0f0;
+  background: var(--white);
   border-radius: 20px;
-  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.10); 
+  box-shadow: 0 2px 8px var(--red-10p); 
   padding: 6px 14px;
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid #ffb3b3;
+  border: 1px solid var(--lighter-4);
   font-size: 15px;
   font-weight: 500;
 }
