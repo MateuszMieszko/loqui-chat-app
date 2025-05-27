@@ -22,15 +22,19 @@ function UserNametag({ children, onClick=undefined, deleted=false }) {
     )
 }
 
-export default function UserPlate({ icon=defaultIcon, onClick=undefined, deleted=false, children }) {
+export default function UserPlate({ icon=defaultIcon, onClick=undefined, deleted=false, children, userId }) {
+
+    const wrapper = () => {
+        onClick(userId);
+    }
 
     return (
         <div
             className="userPlate"
-            onClick={onClick}
+            onClick={wrapper}
             >
                 <UserIcon icon={icon} alt={`${children} profile picture`} onClick={onClick} />
-                <UserNametag onClick={onClick} deleted={deleted}> {children} </UserNametag>
+                <UserNametag deleted={deleted}> {children} </UserNametag>
             </div>
     )
 }

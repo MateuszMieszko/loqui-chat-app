@@ -6,6 +6,7 @@ import ChatHeader from "./ChatHeader";
 import './Chat.css'
 
 async function fetchMessages(chatUserId, token) {
+    if(chatUserId === null) return [];
     try {
         const response = await axios.get(`http://localhost:8000/api/messages/${chatUserId}`, {
             headers: {
@@ -20,7 +21,7 @@ async function fetchMessages(chatUserId, token) {
     }
 }
 
-export default function Chat({ chatUserId, token }) {
+export default function Chat({ chatUserId, token, chatInputRef }) {
     const [messages, setMessages] = useState([]);
 
     const messagesEndRef = useRef(null);
@@ -97,6 +98,7 @@ export default function Chat({ chatUserId, token }) {
                     chatUserId={chatUserId}
                     onMessageSent={handleMessageSent}
                     token={token}
+                    chatInputRef={chatInputRef}
                 />
             </div>
         </>

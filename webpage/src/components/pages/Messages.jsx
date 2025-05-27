@@ -5,7 +5,7 @@ import "../Chat.css"
 import "../Users.css"
 import { Navigate } from "react-router-dom";
 import LogoutButton from "../LogoutButton";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { isLoggedIn } from "../../utils/isLoggedIn";
 import ChatTests from "../ChatTests";
 import axios from "axios";
@@ -51,16 +51,25 @@ export default function Messages() {
         load();
     }, [loadUsers]);
 
+    const chatInputRef = useRef(null);
+
+    const [chatUserId, setChatUserId] = useState(null);
+    function handleUserClick(id) {
+        chatInputRef.current.focus();
+        setChatUserId(id);
+    }
+
     if (authorized === null || !users) return <div>Ładowanie...</div>;
     if (authorized === false) return <Navigate to='/login' replace />;
 
     return (
         <div className="messagesPage">
-            <UsersList users={users} />
+            <UsersList users={users} onClick={handleUserClick}/>
             <Chat
                 key={1}
-                chatUserId={2}
+                chatUserId={chatUserId}
                 token={token}
+                chatInputRef={chatInputRef}
             />
             {/* <ChatTests /> */}
             <SettingsButton />
