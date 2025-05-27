@@ -1,4 +1,4 @@
-export default function SearchBar({ defaultText="Search...", handleChange }) {
+export default function SearchBar({ defaultText="Search...", handleChange, ref }) {
     return (
         <textarea
             className="searchBar"
@@ -6,6 +6,7 @@ export default function SearchBar({ defaultText="Search...", handleChange }) {
             onChange={handleChange}
             placeholder={defaultText}
             rows={1}
+            ref={ref}
             />
     )
 }

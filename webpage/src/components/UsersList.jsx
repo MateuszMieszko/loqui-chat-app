@@ -1,13 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import UserPlate from "./UserPlate"
 import SearchBar from "./SearchBar";
 
 export default function UsersList({ users, onClick=undefined }) {
 
+
     const [ searchedUsers, setSearchedUsers ] = useState(users);
 
-    function handleChange(e) {
-        const newText = e.target.value;
+    function searchUsers(newText) {
         let newUsers = [[], [], [], [], []];
         for ( let user of users ) {
             let username = user.username;
@@ -18,13 +18,26 @@ export default function UsersList({ users, onClick=undefined }) {
             else newUsers[3].push(user);
         }
         setSearchedUsers(newUsers[0].concat(newUsers[1]).concat(newUsers[2]).concat(newUsers[3]));
+        console.log("users: ", users);
+        console.log("searchedUsers: ", searchedUsers);
     }
+
+    function handleChange(e) {
+        const newText = e.target.value;
+        searchUsers(newText);
+    }
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        searchUsers(inputRef.current.value);
+    }, [users]);
 
     return (
         <div
             className="usersList"
             >
-                <SearchBar handleChange={handleChange}/>
+                <SearchBar handleChange={handleChange} ref={inputRef}/>
                 <div className="userPlates">
                     {searchedUsers.map((user) => <UserPlate onClick={onClick} key={user.id} userId={user.id}>{user.username}</UserPlate>)}
                 </div>
