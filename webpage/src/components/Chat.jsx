@@ -34,7 +34,6 @@ export default function Chat({ chatUserId, token, chatInputRef }) {
 
     const loadMessages = useCallback(async () => {
         setError(null);
-        setLoading(true);
         try {
             const response = await fetchMessages(chatUserId, token);
             if (!response || !response.data) throw new Error("No response");
