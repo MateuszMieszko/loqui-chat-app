@@ -9,6 +9,7 @@ import { useEffect, useState, useCallback } from "react";
 import { isLoggedIn } from "../../utils/isLoggedIn";
 import ChatTests from "../ChatTests";
 import axios from "axios";
+import SettingsButton from "../SettingsButton";
 
 async function fetchUsers(token) {
     try {
@@ -48,7 +49,7 @@ export default function Messages() {
             await loadUsers();
         }
         load();
-    }, [self, loadUsers]);
+    }, [loadUsers]);
 
     if (authorized === null || !users) return <div>Ładowanie...</div>;
     if (authorized === false) return <Navigate to='/login' replace />;
@@ -62,6 +63,7 @@ export default function Messages() {
                 token={token}
             />
             {/* <ChatTests /> */}
+            <SettingsButton />
             <LogoutButton />
         </div>
     )
