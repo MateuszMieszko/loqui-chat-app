@@ -2,7 +2,7 @@
   max-width: 480px;
   margin: 48px auto;
   padding: 32px;
-  background-color: #fffafa;
+  background-color: var(--whiter);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   display: flex;
@@ -14,7 +14,7 @@
 .settings-container h1 {
   text-align: center;
   font-size: 26px;
-  color: #ff5252;
+  color: var(--lighter-2);
   font-weight: 700;
   margin-bottom: 8px;
 }
@@ -28,7 +28,7 @@
 .settings-section h2 {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: var(--dark-grey);
   margin-bottom: 8px;
 }
 
@@ -40,28 +40,28 @@
 
 .settings-field label {
   font-size: 14px;
-  color: #444;
+  color: var(--dark-grey);
 }
 
 .settings-field input {
   padding: 12px;
   font-size: 14px;
   border-radius: 8px;
-  border: 1px solid #ffcccc;
-  background-color: #fff;
+  border: 1px solid var(--lighter-6);
+  background-color: var(--whitest);
   transition: border 0.2s ease;
 }
 
 .settings-field input:focus {
-  border-color: #ff5252;
+  border-color: var(--lighter-2);
   outline: none;
 }
 
 .settings-section button {
   padding: 10px 20px;
   font-size: 14px;
-  background-color: #ff5252;
-  color: #fff;
+  background-color: var(--lighter-2);
+  color: var(--whitest);
   border: none;
   border-radius: 8px;
   font-weight: 500;
@@ -70,7 +70,7 @@
 }
 
 .settings-section button:hover {
-  background-color: #ff6b6b;
+  background-color: var(--lighter-3);
 }
 
 .settings-button-wrapper {
@@ -80,7 +80,7 @@
 
 .back-home-button {
   display: inline-block;
-  color: #ff5252;
+  color: var(--lighter-2);
   text-decoration: none;
   font-weight: 500;
   font-size: 14px;
@@ -88,12 +88,12 @@
 }
 
 .back-home-button:hover {
-  color: #ff6b6b;
+  color: var(--lighter-3);
   text-decoration: underline;
 }
 
 .status-message {
   margin-top: 10px;
-  color: #d32f2f;
+  color: var(--darker);
   font-weight: 500;
 }
