@@ -1,6 +1,7 @@
 export default function SearchBar({ defaultText="Search...", handleChange, ref }) {
     return (
-        <textarea
+        <input
+            type="text"
             className="searchBar"
             autoComplete="Off"
             onChange={handleChange}
