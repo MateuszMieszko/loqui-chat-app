@@ -1,0 +1,99 @@
+.settings-container {
+  max-width: 480px;
+  margin: 48px auto;
+  padding: 32px;
+  background-color: #fffafa;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.settings-container h1 {
+  text-align: center;
+  font-size: 26px;
+  color: #ff5252;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settings-section h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.settings-field label {
+  font-size: 14px;
+  color: #444;
+}
+
+.settings-field input {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ffcccc;
+  background-color: #fff;
+  transition: border 0.2s ease;
+}
+
+.settings-field input:focus {
+  border-color: #ff5252;
+  outline: none;
+}
+
+.settings-section button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #ff5252;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.settings-section button:hover {
+  background-color: #ff6b6b;
+}
+
+.settings-button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.back-home-button {
+  display: inline-block;
+  color: #ff5252;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.back-home-button:hover {
+  color: #ff6b6b;
+  text-decoration: underline;
+}
+
+.status-message {
+  margin-top: 10px;
+  color: #d32f2f;
+  font-weight: 500;
+}

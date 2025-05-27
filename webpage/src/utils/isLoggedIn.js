@@ -9,7 +9,7 @@ const isLoggedIn = async () => {
                 Authorization: `Bearer ${token}`
             }
         });
-        return true;
+        return response.data;
     }
     catch (err) {
         console.error('Error occured during checking if user is logged in:', err);
