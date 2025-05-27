@@ -25,7 +25,7 @@ CREATE TABLE blacklisted_tokens (
 );
 
 INSERT INTO users (username, password_hash) VALUES
-    ('alice', '88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589'), -- hasło: abcd
+    ('alice', '$2b$10$a2oQIMNg1mkZqQla1cnEDOVQdKKJxts6dkQ6oAr93ksCF8u/v6Rpe'), -- hasło: abcde
     ('bob',   '$2y$10$qrstuvwxyzabcdefghij'),
     ('carol', '$2y$10$12345678901234567890');
 
@@ -50,4 +50,3 @@ INSERT INTO messages (sender_id, receiver_id, content, created_at) VALUES
     (1, 3, 'Tak, pasuje mi za 10 minut.',                '2025-05-17 12:01:15'),
     (2, 3, 'Carol, prezentacja jest gotowa?',            '2025-05-17 13:20:00'),
     (3, 2, 'Jeszcze ją kończę, potrzebuję godziny.',     '2025-05-17 13:21:45');
-
