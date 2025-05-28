@@ -13,7 +13,6 @@ async function findAll(req, res, next) {
     } else {
         rows = await query('SELECT * FROM users');
     }
-    if (rows.length == 0) return res.status(404).json({ message: "404 No data found." });
     return res.status(200).send({ users_data: rows });
 }
 
