@@ -4,12 +4,11 @@ import "./Messages.css"
 import "../Chat.css"
 import "../Users.css"
 import { Navigate } from "react-router-dom";
-import LogoutButton from "../LogoutButton";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { isLoggedIn } from "../../utils/isLoggedIn";
 import ChatTests from "../ChatTests";
 import axios from "axios";
-import SettingsButton from "../SettingsButton";
+import AccountPlate from "../AccountPlate";
 
 async function fetchUsers(token) {
     try {
@@ -75,8 +74,12 @@ export default function Messages() {
     if (authorized === false) return <Navigate to='/login' replace />;
 
     return (
+        <>
         <div className="messagesPage">
-            <UsersList users={users} onClick={handleUserClick}/>
+            <div className="sidebar">
+                <UsersList users={users} onClick={handleUserClick}/>
+                <AccountPlate username={authorized.username} />
+            </div>
             <Chat
                 key={1}
                 chatUserId={chatUserId}
@@ -84,8 +87,7 @@ export default function Messages() {
                 chatInputRef={chatInputRef}
             />
             {/* <ChatTests /> */}
-            <SettingsButton />
-            <LogoutButton />
         </div>
+        </>
     )
 }

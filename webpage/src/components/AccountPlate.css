@@ -1,0 +1,38 @@
+.account-plate {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: var(--white);
+  border-top: 1px solid var(--lighter-6);
+  border-bottom: 1px solid var(--lighter-6);
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.account-plate h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-grey);
+  user-select: none;
+}
+
+.account-plate > div {
+  display: flex;
+  gap: 8px;
+}
+
+.account-plate button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--lighter-2);
+  color: var(--whitest);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.account-plate button:hover {
+  background-color: var(--lighter-3);
+}

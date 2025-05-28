@@ -35,7 +35,7 @@
   padding: 12px 16px;
   border-radius: 16px;
   position: relative;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.4;
   word-wrap: break-word;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -81,7 +81,7 @@
   border: 1px solid var(--lighter-5);
   background-color: var(--whiter);
   color: var(--dark-grey);
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
 }
 
@@ -98,6 +98,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  font-size: 16px;
 }
 
 .message-input button:hover { 

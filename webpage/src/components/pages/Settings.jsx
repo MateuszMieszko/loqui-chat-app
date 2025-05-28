@@ -18,7 +18,6 @@ export default function Settings() {
     const [status_p, setStatus_p] = useState(null);
 
     const [password_d, setPassword_d] = useState(null);
-    const [confirmPassword_d, setConfirmPassword_d] = useState(null);
     const [status_d, setStatus_d] = useState(null);
 
     const [username, setUsername] = useState(null);
