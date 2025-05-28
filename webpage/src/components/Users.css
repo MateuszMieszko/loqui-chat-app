@@ -1,76 +1,74 @@
 .usersList {
   display: flex;
   flex-direction: column;
-  padding: 3px;
-  height:100%;
+  padding: 16px 16px 0 16px;
   width: 20em;
-  left: 0;
-  position: static;
-  gap: 0.4em;
+  background-color: var(--white-2);
+  border-right: 1px solid var(--lighter-6);
+  gap: 16px;
   overflow: hidden;
+  height: 100%;
 }
 
 .searchBar {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  padding: 5px;
-  background-color: var(--lighter-6);
-  margin-left: 0.3em;
-  margin-right: 0.3em;
-  border-radius: 10px;
-  border: 3px solid var(--lighter-3);
-}
-.searchBar:focus-within {
-  background-color: var(--lighter-5);
-  border-color: var(--lighter-2);
-  box-shadow: none;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: var(--whiter);
+  border: 1px solid var(--lighter-4);
+  color: var(--dark-grey);
+  font-size: 16px;
   outline: none;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.searchBar:focus {
+  border-color: var(--lighter-2);
+  background-color: var(--white);
 }
 
 .userPlates {
   flex: 1;
   overflow-y: auto;
-  gap: 0.5em;
   display: flex;
   flex-direction: column;
-  /* height: 100%; */
+  gap: 10px;
 }
 
 .userPlate {
-  display:flex;
-  gap: 1em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  justify-content:center;
-  align-items:center;
-  flex-direction:row;
-  padding:0.2em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
   background-color: var(--lighter-4);
-  border-width: 0.4em;
-  border-style: solid;
-  border-radius: 10px;
-  border-color: var(--lighter-2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  gap: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
-/* darker on hover */
 .userPlate:hover {
   background-color: var(--lighter-35);
-  border-color: var(--lighter-1);
-  box-shadow: 0 0 5px var(--black-10p);
-  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
 }
 
 .userIcon {
-  left: 0;
-  width:2.5em;
-  height:2.5em;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--lighter-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: var(--whitest);
+  flex-shrink: 0;
 }
 
 .userNametag {
   flex: 1;
-  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--dark-grey);
+  text-align: left;
+  user-select: none;
 }

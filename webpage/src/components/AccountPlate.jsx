@@ -5,7 +5,7 @@ import "./AccountPlate.css";
 export default function AccountPlate({ username }) {
     return (
         <div className="account-plate">
-            <h2>{username}</h2>
+            <span>{username}</span>
             <div>
                 <SettingsButton />
                 <LogoutButton />
