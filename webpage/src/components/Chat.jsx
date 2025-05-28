@@ -62,7 +62,7 @@ export default function Chat({ chatUserId, token, chatInputRef }) {
     useEffect(() => {
         const intervalId = setInterval(() => {
             loadMessages();
-        }, 5000);
+        }, 1000);
 
         return () => clearInterval(intervalId);
     }, [loadMessages]);
