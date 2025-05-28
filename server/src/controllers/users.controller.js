@@ -2,7 +2,17 @@ import { query } from "../utils/databaseQuery.js";
 import { bcryptHash } from "../utils/hashingFunction.js";
 
 async function findAll(req, res, next) {
-    const rows = await query('SELECT * FROM users');
+    const search = req.query.search;
+    let rows;
+    if (search) {
+        // Case-insensitive search by username
+        rows = await query(
+            'SELECT * FROM users WHERE LOWER(username) LIKE LOWER(?)',
+            [`%${search}%`]
+        );
+    } else {
+        rows = await query('SELECT * FROM users');
+    }
     if (rows.length == 0) return res.status(404).json({ message: "404 No data found." });
     return res.status(200).send({ users_data: rows });
 }
