@@ -14,7 +14,7 @@ body {
 .container {
   width: 400px;
   margin: 60px auto;
-  background: var(--white);
+  background: var(--whitest);
   border-radius: 18px;
   box-shadow: 0 4px 32px var(--red-10p), 0 1.5px 8px var(--red-10p);
   padding: 36px 32px 32px 32px;
@@ -216,9 +216,9 @@ body {
   top: 20px; 
   left: 20px; 
   z-index: 10;
-  background: var(--white);
+  background: var(--whitest);
   border-radius: 20px;
-  box-shadow: 0 2px 8px var(--red-10p); 
+  box-shadow: 0 2px 8px var(--black-10p); 
   padding: 6px 14px;
   display: flex;
   align-items: center;

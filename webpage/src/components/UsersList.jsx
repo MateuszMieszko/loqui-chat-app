@@ -3,10 +3,7 @@ import UserPlate from "./UserPlate"
 import SearchBar from "./SearchBar";
 
 export default function UsersList({ users, onClick=undefined }) {
-
-
     const [ searchedUsers, setSearchedUsers ] = useState(users);
-
     function searchUsers(newText) {
         let newUsers = [[], [], [], [], []];
         for ( let user of users ) {
@@ -19,12 +16,10 @@ export default function UsersList({ users, onClick=undefined }) {
         }
         setSearchedUsers(newUsers[0].concat(newUsers[1]).concat(newUsers[2]).concat(newUsers[3]));
     }
-
     function handleChange(e) {
         const newText = e.target.value;
         searchUsers(newText);
     }
-
     const inputRef = useRef(null);
 
     useEffect(() => {
