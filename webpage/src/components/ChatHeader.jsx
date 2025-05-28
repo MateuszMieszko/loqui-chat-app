@@ -12,7 +12,7 @@ export default function ChatHeader({ chatUserId, token }) {
                     Authorization: `Bearer ${token}`
                 }
             });
-            setUsername(response.data.user_data.username)
+            setUsername(response.data.user_data.username);
         };
         loadUserData();
     });
