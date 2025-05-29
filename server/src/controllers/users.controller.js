@@ -7,13 +7,14 @@ async function findAll(req, res, next) {
     // join with 'messages' table to get the latest message for each user
     let innerQuery = "(SELECT sender_id, receiver_id, MAX(created_at) AS latest_message FROM messages GROUP BY receiver_id, sender_id HAVING sender_id = ? OR receiver_id = ?) AS latest_messages";
     let params = [req.sessionUser.id, req.sessionUser.id];
+    let importantColumns = "users.id, users.username, users.deleted, latest_messages.latest_message";
     let outerQuery;
     if (search) {
         // Case-insensitive search by username
-        outerQuery = `SELECT * FROM users LEFT JOIN ${innerQuery} ON (users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id) HAVING LOWER(users.username) LIKE LOWER(?) ORDER BY latest_messages.latest_message DESC;`;
+        outerQuery = `SELECT ${importantColumns} FROM users LEFT JOIN ${innerQuery} ON (users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id) HAVING LOWER(users.username) LIKE LOWER(?) ORDER BY latest_messages.latest_message DESC;`;
         params = [...params, `%${search}%`];
     } else {
-        outerQuery =  `SELECT * FROM users LEFT JOIN ${innerQuery} ON users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id ORDER BY latest_messages.latest_message DESC;`;
+        outerQuery =  `SELECT ${importantColumns} FROM users LEFT JOIN ${innerQuery} ON users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id ORDER BY latest_messages.latest_message DESC;`;
     }
     // delete duplicate users (if they are both sender and receiver)
     rows = await query(outerQuery, params);
