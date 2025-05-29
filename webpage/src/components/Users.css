@@ -40,7 +40,16 @@
   position: absolute;
   top: 5em;
   right: 1.4em;
-  background-color: var(--whiter);
+  /* background-color: var(--whiter); */
+}
+.sortingOrderButton img {
+  width: 2em;
+  height: 2em;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.sortingOrderButton img:hover {
+  transform: rotate(180deg);
 }
 
 .userPlate {

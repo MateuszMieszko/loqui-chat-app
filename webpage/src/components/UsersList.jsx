@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import UserPlate from "./UserPlate"
 import SearchBar from "./SearchBar";
 import axios from "axios";
+import sortingIcon from "../assets/sort_icon.png";
 
 async function fetchUsers(token, sortingOrder, search = "") {
     try {
@@ -64,7 +65,7 @@ export default function UsersList({ onClick=undefined }) {
     return (
         <div className="usersList">
             <SearchBar handleChange={handleChange} ref={inputRef}/>
-            <SortingOrderButton onClick={toggleSortingOrder}>{sortingOrder}</SortingOrderButton>
+            <SortingOrderButton onClick={toggleSortingOrder}><img src={sortingIcon} /></SortingOrderButton>
             <div className="userPlates">
                 {users.length === 0 ? (
                     <div style={{ padding: "1em", color: "#888" }}>Brak użytkowników spełniających kryteria wyszukiwania.</div>
