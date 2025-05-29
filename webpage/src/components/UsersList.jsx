@@ -30,6 +30,7 @@ export default function UsersList({ onClick=undefined }) {
         const token = localStorage.getItem('token');
         const loadUsers = async () => {
             const usersData = await fetchUsers(token);
+            console.log("Fetched users:", usersData);
             setUsers(usersData);
         };
         loadUsers();
@@ -40,6 +41,7 @@ export default function UsersList({ onClick=undefined }) {
         const newText = e.target.value;
         const token = localStorage.getItem('token');
         const usersData = await fetchUsers(token, newText);
+        console.log("Fetched users:", usersData);
         setUsers(usersData);
     }
 

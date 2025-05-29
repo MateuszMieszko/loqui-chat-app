@@ -4,16 +4,27 @@ import { bcryptHash } from "../utils/hashingFunction.js";
 async function findAll(req, res, next) {
     const search = req.query.search;
     let rows;
+    // join with 'messages' table to get the latest message for each user
+    let innerQuery = "(SELECT sender_id, receiver_id, MAX(created_at) AS latest_message FROM messages GROUP BY receiver_id, sender_id HAVING sender_id = ? OR receiver_id = ?) AS latest_messages";
+    let params = [req.sessionUser.id, req.sessionUser.id];
+    let outerQuery;
     if (search) {
         // Case-insensitive search by username
-        rows = await query(
-            'SELECT * FROM users WHERE LOWER(username) LIKE LOWER(?)',
-            [`%${search}%`]
-        );
+        outerQuery = `SELECT * FROM users LEFT JOIN ${innerQuery} ON (users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id) HAVING LOWER(users.username) LIKE LOWER(?) ORDER BY latest_messages.latest_message DESC;`;
+        params = [...params, `%${search}%`];
     } else {
-        rows = await query('SELECT * FROM users');
+        outerQuery =  `SELECT * FROM users LEFT JOIN ${innerQuery} ON users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id ORDER BY latest_messages.latest_message DESC;`;
     }
-    return res.status(200).send({ users_data: rows });
+    // delete duplicate users (if they are both sender and receiver)
+    rows = await query(outerQuery, params);
+    const uniqueUsers = [], foundUsers = {};
+    rows.forEach(user => {
+        if(!foundUsers[user.id]) {
+            foundUsers[user.id] = true;
+            uniqueUsers.push(user);
+        }
+    });
+    return res.status(200).send({ users_data: uniqueUsers });
 }
 
 async function findOne(req, res, next) {
