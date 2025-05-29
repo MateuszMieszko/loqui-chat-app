@@ -1,10 +1,11 @@
-import express from "express";
-import dotenv from "dotenv";
-import authRouter from "./src/routes/auth.route.js";
-import messagesRouter from "./src/routes/messages.route.js";
-import usersRouter from "./src/routes/users.route.js";
-import { catchErrors, notFound } from "./src/middlewares/errors.js";
-import cors from "cors";
+const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+
+const authRouter = require('./src/routes/auth.route');
+const messagesRouter = require('./src/routes/messages.route');
+const usersRouter = require('./src/routes/users.route');
+const { catchErrors, notFound } = require('./src/middlewares/errors');
 
 dotenv.config();
 const PORT = process.env.SERVER_PORT;

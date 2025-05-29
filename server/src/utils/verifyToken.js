@@ -1,8 +1,8 @@
-import jwt from "jsonwebtoken";
-import { JWT_SECRET_KEY } from "../configs/auth.config.js";
-import { isTokenBlacklisted } from "./blacklistedTokens.js";
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET_KEY } = require("../configs/auth.config");
+const { isTokenBlacklisted } = require("./blacklistedTokens");
 
-export async function verifyToken(token) {
+async function verifyToken(token) {
     if (!token) return false;
 
     try {
@@ -18,3 +18,5 @@ export async function verifyToken(token) {
         return false;
     }
 }
+
+module.exports = { verifyToken };

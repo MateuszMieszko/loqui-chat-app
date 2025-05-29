@@ -1,9 +1,9 @@
-import { Router } from "express";
-import usersController from "../controllers/users.controller.js"; 
-import { catchAsync } from "../middlewares/errors.js";
-import { isLogged } from "../middlewares/auth.js";
+const express = require("express");
+const usersController = require("../controllers/users.controller");
+const { catchAsync } = require("../middlewares/errors");
+const { isLogged } = require("../middlewares/auth");
 
-const api = Router();
+const api = express.Router();
 
 // GET /users
 api.get('/', isLogged, catchAsync(usersController.findAll));
@@ -20,4 +20,4 @@ api.delete('/', isLogged, catchAsync(usersController.remove));
 // PUT /users
 api.put('/', isLogged, catchAsync(usersController.modify));
 
-export default api;
+module.exports = api;

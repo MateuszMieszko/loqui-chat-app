@@ -1,8 +1,8 @@
-import { query, dateToTimestamp } from "./databaseQuery.js";
-import jwt from "jsonwebtoken";
-import { JWT_SECRET_KEY } from "../configs/auth.config.js";
+const { query, dateToTimestamp } = require("./databaseQuery");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET_KEY } = require("../configs/auth.config");
 
-export async function addTokenToBlacklist(token, reason=null) {
+async function addTokenToBlacklist(token, reason=null) {
     await removeExpiredTokens();
     if (!token) return;
 
@@ -24,7 +24,7 @@ export async function addTokenToBlacklist(token, reason=null) {
     }
 }
 
-export async function isTokenBlacklisted(token) {
+async function isTokenBlacklisted(token) {
     if (!token) return false;
 
     console.log("isTokenBlacklisted", token);
@@ -45,7 +45,7 @@ export async function isTokenBlacklisted(token) {
     }
 }
 
-export async function removeExpiredTokens() {
+async function removeExpiredTokens() {
     try {
         const sqlQuery = "DELETE FROM blacklisted_tokens WHERE expires_at IS NOT NULL AND expires_at < NOW()";
 
@@ -58,5 +58,8 @@ export async function removeExpiredTokens() {
     }
 }
 
-// let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXNlcm5hbWUiOiJ6dXpvbCIsImlhdCI6MTc0NzY4MjQyNywiZXhwIjoxODM0MDgyNDI3fQ.I9WbxNQczLMahEn2aglRP4lDCkUWbFxfa1BLW-oNd0s";
-// console.log("isTokenBlacklisted", await isTokenBlacklisted(token));
+module.exports = {
+    addTokenToBlacklist,
+    isTokenBlacklisted,
+    removeExpiredTokens
+};

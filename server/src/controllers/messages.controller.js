@@ -1,4 +1,4 @@
-import { query } from "../utils/databaseQuery.js";
+const { query } = require("../utils/databaseQuery");
 
 async function findConversation(req, res, next) {
     // parametry id uzytkownika
@@ -19,7 +19,7 @@ async function sendMessage(req, res, next) {
     return res.status(201).send({ message : "201 New message created successfully." });
 }
 
-export default {
+module.exports = {
     findConversation,
-    sendMessage 
-}
+    sendMessage
+};

@@ -1,7 +1,7 @@
-import { verifyToken } from "../utils/verifyToken.js";
-import { query } from "../utils/databaseQuery.js";
+const { verifyToken } = require("../utils/verifyToken");
+const { query } = require("../utils/databaseQuery");
 
-export async function isLogged(req, res, next) {
+async function isLogged(req, res, next) {
     try {
         const authHeader = req.headers.authorization;
         if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -23,3 +23,5 @@ export async function isLogged(req, res, next) {
         return res.status(401).json({ message: "401 Access denied. No token provided." });
     }
 }
+
+module.exports = { isLogged };

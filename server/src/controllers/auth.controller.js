@@ -1,8 +1,8 @@
-import { query } from "../utils/databaseQuery.js";
-import { JWT_SECRET_KEY, JWT_LIFETIME } from "../configs/auth.config.js";
-import jwt from "jsonwebtoken";
-import { bcryptCompare } from "../utils/hashingFunction.js";
-import { addTokenToBlacklist } from "../utils/blacklistedTokens.js";
+const { query } = require('../utils/databaseQuery');
+const { JWT_SECRET_KEY, JWT_LIFETIME } = require('../configs/auth.config');
+const jwt = require('jsonwebtoken');
+const { bcryptCompare } = require('../utils/hashingFunction');
+const { addTokenToBlacklist } = require('../utils/blacklistedTokens');
 
 async function login(req, res, next) {
     const sqlQuery = "SELECT * FROM users WHERE username = ?";
@@ -55,8 +55,8 @@ async function checkIfLoggedIn(req, res, next) {
     });
 }
 
-export default {
+module.exports = {
     login,
     logout,
     checkIfLoggedIn
-}
+};

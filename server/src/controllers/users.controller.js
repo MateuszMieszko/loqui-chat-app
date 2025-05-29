@@ -1,5 +1,5 @@
-import { query } from "../utils/databaseQuery.js";
-import { bcryptHash } from "../utils/hashingFunction.js";
+const { query } = require("../utils/databaseQuery");
+const { bcryptHash } = require("../utils/hashingFunction");
 
 async function findAll(req, res, next) {
     const search = req.query.search;
@@ -67,10 +67,10 @@ async function modify(req, res, next) {
     return res.status(200).send({ message: "200 Edited user info." });
 }
 
-export default {
+module.exports = {
     findAll,
     findOne,
     create,
     remove,
     modify
-}
+};

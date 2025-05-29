@@ -1,9 +1,9 @@
-import mysql from "mysql2/promise";
-import { db_credentials } from "../configs/db.config.js";
+const mysql = require("mysql2/promise");
+const { db_credentials } = require("../configs/db.config");
 
 const pool = mysql.createPool(db_credentials);
 
-export async function query(sql, params=null) {
+async function query(sql, params=null) {
     let connection;
     try {
         const [rows, fields] = await pool.execute(sql, params);
@@ -14,6 +14,11 @@ export async function query(sql, params=null) {
     }
 }
 
-export function dateToTimestamp(date) {
+function dateToTimestamp(date) {
     return date.toISOString().slice(0, 19).replace('T', ' ');
 }
+
+module.exports = {
+    query,
+    dateToTimestamp
+};
