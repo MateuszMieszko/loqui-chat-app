@@ -3,6 +3,8 @@ import { bcryptHash } from "../utils/hashingFunction.js";
 
 async function findAll(req, res, next) {
     const search = req.query.search;
+    const sortingOrder = req.query.sortingOrder;
+    if(sortingOrder !== "ASC" && sortingOrder !== "DESC") sortingOrder = "DESC";
     let rows;
     // join with 'messages' table to get the latest message for each user
     let innerQuery = "(SELECT sender_id, receiver_id, MAX(created_at) AS latest_message FROM messages GROUP BY receiver_id, sender_id HAVING sender_id = ? OR receiver_id = ?) AS latest_messages";
@@ -11,10 +13,10 @@ async function findAll(req, res, next) {
     let outerQuery;
     if (search) {
         // Case-insensitive search by username
-        outerQuery = `SELECT ${importantColumns} FROM users LEFT JOIN ${innerQuery} ON (users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id) HAVING LOWER(users.username) LIKE LOWER(?) ORDER BY latest_messages.latest_message DESC;`;
+        outerQuery = `SELECT ${importantColumns} FROM users LEFT JOIN ${innerQuery} ON (users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id) HAVING LOWER(users.username) LIKE LOWER(?) ORDER BY latest_messages.latest_message ${sortingOrder};`;
         params = [...params, `%${search}%`];
     } else {
-        outerQuery =  `SELECT ${importantColumns} FROM users LEFT JOIN ${innerQuery} ON users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id ORDER BY latest_messages.latest_message DESC;`;
+        outerQuery =  `SELECT ${importantColumns} FROM users LEFT JOIN ${innerQuery} ON users.id = latest_messages.sender_id OR users.id = latest_messages.receiver_id ORDER BY latest_messages.latest_message ${sortingOrder};`;
     }
     // delete duplicate users (if they are both sender and receiver)
     rows = await query(outerQuery, params);

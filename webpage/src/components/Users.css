@@ -1,4 +1,5 @@
 .usersList {
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 16px 16px 0 16px;
@@ -32,6 +33,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.sortingOrderButton {
+  /* located in top right corner, absolute location relative to parent */
+  position: absolute;
+  top: 5em;
+  right: 1.4em;
+  background-color: var(--whiter);
 }
 
 .userPlate {
