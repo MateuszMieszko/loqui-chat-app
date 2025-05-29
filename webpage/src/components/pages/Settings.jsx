@@ -28,9 +28,10 @@ export default function Settings() {
             setAuthorized(result);
         };
         checkAuth();
-        setUsername(null);
+    }, []);
+    useEffect(() => {
         if (authorized) setUsername(authorized.username);
-    }, [authorized]);
+    }, [authorized])
     if (authorized === null) return <div>Ładowanie...</div>;
     if (authorized === false) return <Navigate to='/login' replace />;
     const token = localStorage.getItem('token');
@@ -49,7 +50,7 @@ export default function Settings() {
                 return;
             }
 
-            const response = await axios.put('http://localhost:8000/api/users', {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/users`, {
                 username: newUsername_u
             }, {
                 headers: {
@@ -88,7 +89,7 @@ export default function Settings() {
                 return;
             }
 
-            const response = await axios.put('http://localhost:8000/api/users', {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/users`, {
                 password: newPassword_p
             }, {
                 headers: {
@@ -121,7 +122,7 @@ export default function Settings() {
                 return;
             }
 
-            const response = await axios.delete('http://localhost:8000/api/users', {
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/users`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

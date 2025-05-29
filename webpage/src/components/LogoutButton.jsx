@@ -8,7 +8,7 @@ export default function LogoutButton() {
         const token = localStorage.getItem('token');
         if (!token) navigate('/login');
         try {
-            const response = await axios.delete('http://localhost:8000/api/auth', {
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/auth`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

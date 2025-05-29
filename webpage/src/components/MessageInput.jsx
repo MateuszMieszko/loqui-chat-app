@@ -9,7 +9,7 @@ export default function MessageInput({ chatUserId, onMessageSent, token, chatInp
         if (!trimmed) return;
 
         try {
-            const response = await axios.post("http://localhost:8000/api/messages", {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/messages`, {
                 receiver_id: chatUserId,
                 content: trimmed,
             }, {

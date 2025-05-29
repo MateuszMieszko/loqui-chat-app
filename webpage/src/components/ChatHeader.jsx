@@ -7,7 +7,7 @@ export default function ChatHeader({ chatUserId, token }) {
     useEffect(() => {
         const loadUserData = async () => {
             if(chatUserId === null) return;
-            const response = await axios.get(`http://localhost:8000/api/users/${chatUserId}`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/${chatUserId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

@@ -7,7 +7,7 @@ import sortingIcon from "../assets/sort_icon.png";
 async function fetchUsers(token, sortingOrder, search = "") {
     try {
         const response = await axios.get(
-            `http://localhost:8000/api/users?sortingOrder=${sortingOrder}${search ? `&search=${encodeURIComponent(search)}` : ""}`,
+            `${import.meta.env.VITE_API_URL}/api/users?sortingOrder=${sortingOrder}${search ? `&search=${encodeURIComponent(search)}` : ""}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`

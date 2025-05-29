@@ -8,7 +8,7 @@ import './Chat.css'
 async function fetchMessages(chatUserId, token) {
     if(chatUserId === null) return [];
     try {
-        const response = await axios.get(`http://localhost:8000/api/messages/${chatUserId}`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/messages/${chatUserId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
