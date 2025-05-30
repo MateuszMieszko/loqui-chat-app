@@ -5,9 +5,6 @@ export default function SettingsButton() {
     const navigate = useNavigate();
     const [lang, setLang] = useState(localStorage.getItem("lang") || "pl");
 
-    const handleClick = () => {
-        navigate('/settings')
-    }
     useEffect(() => {
         const onStorage = () => setLang(localStorage.getItem("lang") || "pl");
         window.addEventListener("storage", onStorage);
@@ -17,6 +14,10 @@ export default function SettingsButton() {
         pl: { setting: "Ustawienia" },
         en: { setting: "Settings" }
     };
+    
+    const handleClick = () => {
+        navigate('/settings')
+    }
     return (
         <button onClick={handleClick}>
            {messages[lang].setting}

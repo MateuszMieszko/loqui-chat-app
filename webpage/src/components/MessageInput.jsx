@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function MessageInput({ chatUserId, onMessageSent, token, chatInputRef }) {
@@ -31,18 +31,37 @@ export default function MessageInput({ chatUserId, onMessageSent, token, chatInp
         if (e.key === "Enter") handleSend();
     }
 
+    const [lang, setLang] = useState(localStorage.getItem("lang") || "pl");
+    
+    useEffect(() => {
+        const onStorage = () => setLang(localStorage.getItem("lang") || "pl");
+        window.addEventListener("storage", onStorage);
+        return () => window.removeEventListener("storage", onStorage);
+    }, []);
+    const messages = {
+        pl: { 
+            writeMessage: "Napisz wiadomość...",
+            send: "Wyślij"
+        },
+        en: {
+            writeMessage: "write a message...",
+            send: "Send"
+        }
+    };
     return (
         <>
             <div className="message-input">
                 <input
                     type="text"
-                    placeholder="Napisz wiadomość..."
+                    placeholder= {messages[lang].writeMessage}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyPress}
                     ref={chatInputRef}
                 />
-                <button onClick={handleSend}>Wyślij</button>
+                <button onClick={handleSend}>
+                    {messages[lang].send}
+                </button>
             </div>
         </>
     )
