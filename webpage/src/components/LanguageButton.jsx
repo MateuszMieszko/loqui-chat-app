@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './LanguageButton.css';
 
 export default function LanguageButton() {
-    const [lang, setLang] = useState('pl');
+    useEffect(() => {
+        if (!localStorage.getItem("lang")) {
+            localStorage.setItem("lang", "pl");
+        }
+    }, []);
+    const [lang, setLang] = useState(localStorage.getItem("lang") || "pl");
     const changeLanguage = (lang) => { 
-        setLang(lang === 'pl' ? 'pl' : 'en');
+        setLang(lang);
         localStorage.setItem('lang', lang);
         window.dispatchEvent(new Event("storage"));
     }
