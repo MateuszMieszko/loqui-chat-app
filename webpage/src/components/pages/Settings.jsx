@@ -53,7 +53,6 @@ export default function Settings() {
             newPassword: "Nowe hasło",
             confirmNewPassword: "Potwierdź nowe hasło",
             confirmNewPasswordPlaceholder: "Potwierdź nowe hasło...",
-            deleteAccount: "Usuń konto",
             passwordPrompt: "Podaj hasło",
             deleteAccountHeader: "Usuń konto"
         },
