@@ -6,17 +6,18 @@ export default function LanguageButton() {
     const changeLanguage = (lang) => { 
         setLang(lang === 'pl' ? 'pl' : 'en');
         localStorage.setItem('lang', lang);
+        window.dispatchEvent(new Event("storage")); // DODAJ TO!
     }
     return (
         <div className='lang-switch-containerIN'>
             <div className='lang-btn-containerIN'>
                 <button 
                     className={`lang-btnIN${lang === 'pl' ? ' activeIN' : ''}`}
-                    onClick={() => setLang('pl')}
+                    onClick={() => changeLanguage('pl')}
                 >PL</button>
                 <button 
                     className={`lang-btnIN${lang === 'en' ? ' activeIN' : ''}`}
-                    onClick={() => setLang('en')}
+                    onClick={() => changeLanguage('en')}
                 >EN</button>
             </div>
         </div>
