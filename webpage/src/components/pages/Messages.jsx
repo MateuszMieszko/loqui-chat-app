@@ -8,6 +8,7 @@ import { useEffect, useState, useRef } from "react";
 import { isLoggedIn } from "../../utils/isLoggedIn";
 import ChatTests from "../ChatTests";
 import AccountPlate from "../AccountPlate";
+import LanguageButton from "../LanguageButton";
 
 export default function Messages() {
     const [authorized, setAuthorized] = useState(null);
@@ -49,6 +50,7 @@ export default function Messages() {
                 <UsersList onClick={handleUserClick}/>
                 <AccountPlate username={authorized.username} />
             </div>
+            <LanguageButton />
             <Chat
                 key={1}
                 chatUserId={chatUserId}

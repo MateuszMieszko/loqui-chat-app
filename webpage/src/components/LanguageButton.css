@@ -1,0 +1,30 @@
+.lang-btnIN {
+  border: none;
+  border-radius: 12px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--lighter-1);
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+.lang-btnIN.activeIN {
+  background: var(--lighter-1);
+  color: var(--white);
+  font-weight: 700;
+}
+.lang-switch-containerIN {
+  position: absolute;
+  top: 5px; 
+  right: 25px; 
+  background: var(--whitest);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px var(--black-10p); 
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--lighter-4);
+  font-size: 15px;
+  font-weight: 500;
+}

@@ -216,6 +216,7 @@ body {
   top: 20px; 
   left: 20px; 
   z-index: 10;
+  max-width: 120px;
   background: var(--whitest);
   border-radius: 20px;
   box-shadow: 0 2px 8px var(--black-10p); 

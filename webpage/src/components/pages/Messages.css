@@ -1,4 +1,5 @@
 .messagesPage {
+  position: relative;
   display: flex;
   flex-direction: row;
   height: calc(100vh);
